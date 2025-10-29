@@ -11,18 +11,12 @@
             </footer>
             </div>
             </div>
-            <script src="../assets/static/js/components/dark.js"></script>
-            <script src="../assets/extensions/perfect-scrollbar/perfect-scrollbar.min.js"></script>
-
-
-            <script src="../assets/compiled/js/app.js"></script>
-
-
-
+            <script src="/rpa-spp/assets/static/js/components/dark.js"></script>
+            <script src="/rpa-spp/assets/extensions/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+            <script src="/rpa-spp/assets/compiled/js/app.js"></script>
             <!-- Need: Apexcharts -->
-            <!-- Need: Apexcharts -->
-            <script src="../assets/extensions/apexcharts/apexcharts.min.js"></script>
-            <script src="../assets/static/js/pages/dashboard.js"></script>
+            <script src="/rpa-spp/assets/extensions/apexcharts/apexcharts.min.js"></script>
+            <script src="/rpa-spp/assets/static/js/pages/dashboard.js"></script>
 
             </body>
 
