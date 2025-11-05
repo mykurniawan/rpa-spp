@@ -27,58 +27,92 @@
                     </div>
                     <div class="card-content">
                         <div class="card-body">
-                            <form class="form">
+                            <form class="form" method="post" action="../../proses/proses_input_siswa.php">
                                 <div class="row">
                                     <div class="col-md-6 col-12">
                                         <div class="form-group">
-                                            <label for="first-name-column">Nama Lengkap</label>
-                                            <input type="text" id="first-name-column" class="form-control"
-                                                placeholder="Nama Lengkap" name="fname-column">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 col-12">
-                                        <div class="form-group">
                                             <label for="last-name-column">NIS</label>
-                                            <input type="text" id="last-name-column" class="form-control"
-                                                placeholder="NIS" name="lname-column">
+                                            <input type="text" id="nis" class="form-control"
+                                                placeholder="NIS" name="nis">
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-12">
                                         <div class="form-group">
-                                            <label for="city-column">City</label>
-                                            <input type="text" id="city-column" class="form-control" placeholder="City"
-                                                name="city-column">
+                                            <label for="first-name-column">Nama Lengkap</label>
+                                            <input type="text" id="nama" class="form-control"
+                                                placeholder="Nama Lengkap" name="nama" required>
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-12">
                                         <div class="form-group">
-                                            <label for="country-floating">Country</label>
-                                            <input type="text" id="country-floating" class="form-control"
-                                                name="country-floating" placeholder="Country">
+                                            <label for="city-column">Jenis Kelamin</label>
+                                            <fieldset class="form-group">
+                                                <select class="form-select" id="jk" name="jk">
+                                                    <option value="">--Pilih--</option>
+                                                    <option value="Laki-laki">Laki-laki</option>
+                                                    <option value="Perempuan">Perempuan</option>
+                                                </select>
+                                            </fieldset>
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-12">
                                         <div class="form-group">
-                                            <label for="company-column">Company</label>
-                                            <input type="text" id="company-column" class="form-control"
-                                                name="company-column" placeholder="Company">
+                                            <label for="country-floating">Tempat Lahir</label>
+                                            <input type="text" id="tempat_lahir" class="form-control"
+                                                name="tempat_lahir" placeholder="Tempat Lahir" required>
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-12">
                                         <div class="form-group">
-                                            <label for="email-id-column">Email</label>
-                                            <input type="email" id="email-id-column" class="form-control"
-                                                name="email-id-column" placeholder="Email">
+                                            <label for="company-column">Tanggal Lahir</label>
+                                            <input type="date" id="tgl_lahir" class="form-control"
+                                                name="tgl_lahir" placeholder="Tanggal Lahir" required>
                                         </div>
                                     </div>
-                                    <div class="form-group col-12">
+                                    <div class="col-md-6 col-12">
+                                        <div class="form-group">
+                                            <label for="email-id-column">Alamat</label>
+                                            <input type="text" id="alamat" class="form-control"
+                                                name="alamat" placeholder="Alamat" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-12">
+                                        <div class="form-group">
+                                            <label for="email-id-column">Kelas</label>
+                                            <input type="text" id="kelas" class="form-control"
+                                                name="kelas" placeholder="Kelas" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-12">
+                                        <div class="form-group">
+                                            <label for="email-id-column">Nama Walimurid</label>
+                                            <input type="text" id="nama_walimurid" class="form-control"
+                                                name="nama_walimurid" placeholder="Nama Walimurid" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 col-12">
+                                        <div class="form-group">
+                                            <label for="email-id-column">Pekerjaan Walimurid</label>
+                                            <input type="text" id="pekerjaan_walimurid" class="form-control"
+                                                name="pekerjaan_walimurid" placeholder="Pekerjaan Walimurid" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-12">
+                                        <div class="form-group">
+                                            <label for="email-id-column">Asal Sekolah</label>
+                                            <input type="text" id="asal_sekolah" class="form-control"
+                                                name="asal_sekolah" placeholder="Asal Sekolah"  required>
+                                        </div>
+                                    </div>
+                                    <!-- <div class="form-group col-12">
                                         <div class='form-check'>
                                             <div class="checkbox">
                                                 <input type="checkbox" id="checkbox5" class='form-check-input' checked>
                                                 <label for="checkbox5">Remember Me</label>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> -->
                                     <div class="col-12 d-flex justify-content-end">
                                         <button type="submit" class="btn btn-primary me-1 mb-1">Submit</button>
                                         <button type="reset" class="btn btn-light-secondary me-1 mb-1">Reset</button>
