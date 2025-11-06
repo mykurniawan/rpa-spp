@@ -1,8 +1,6 @@
 <?php 
 include '../connect.php';
 
-
-// 2️⃣ Ambil data dari form (gunakan filter untuk keamanan)
 $nis                 = mysqli_real_escape_string($connect, $_POST['nis']);
 $nama                = mysqli_real_escape_string($connect, $_POST['nama']);
 $jenis_kelamin       = mysqli_real_escape_string($connect, $_POST['jk']);
@@ -14,7 +12,7 @@ $nama_walimurid      = mysqli_real_escape_string($connect, $_POST['nama_walimuri
 $pekerjaan_walimurid = mysqli_real_escape_string($connect, $_POST['pekerjaan_walimurid']);
 $asal_sekolah        = mysqli_real_escape_string($connect, $_POST['asal_sekolah']);
 
-// 3️⃣ Query untuk menyimpan data ke tabel siswa
+
 $query = "INSERT INTO t_siswa (
                 nis, nama, jk, tempat_lahir, tgl_lahir, alamat,
                 nama_wali, kelas, pekerjaan_wali, asal_sekolah
@@ -23,11 +21,11 @@ $query = "INSERT INTO t_siswa (
                  '$nama_walimurid', '$kelas', '$pekerjaan_walimurid', '$asal_sekolah'
           )";
 
-// 4️⃣ Eksekusi query
+
 if (mysqli_query($connect, $query)) {
     echo "<script>
             alert('Data siswa berhasil disimpan!');
-            window.location.href = '../dashboard/dashboard_administrasi.php'; // ubah sesuai halaman tujuanmu
+            window.location.href = '../page/petugas_administrasi/dashboard_administrasi.php'; // ubah sesuai halaman tujuanmu
           </script>";
 } else {
     echo "<script>
@@ -36,8 +34,6 @@ if (mysqli_query($connect, $query)) {
           </script>";
 }
 
-// 5️⃣ Tutup connect
-mysqli_close($connect);
-?>
 
+mysqli_close($connect);
 ?>

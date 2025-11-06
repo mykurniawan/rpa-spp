@@ -66,7 +66,7 @@
                         <!-- <li class="sidebar-title">Menu</li> -->
                         <li
                             class="sidebar-item active ">
-                            <a href="../../dashboard/dashboard_administrasi.php" class='sidebar-link'>
+                            <a href="../../page/petugas_administrasi/dashboard_administrasi.php" class='sidebar-link'>
                                 <i class="bi bi-grid-fill"></i>
                                 <span>Dashboard Petugas Administrasi</span>
                             </a>
@@ -86,10 +86,10 @@
                                 </li>
 
                                 <li class="submenu-item  ">
-                                    <a href="../page/petugas_administrasi/input_data_siswa.php" class="submenu-link">Input data siswa</a>
+                                    <a href="../../page/petugas_administrasi/input_data_siswa.php" class="submenu-link">Input data siswa</a>
                                 </li>
                                 <li class="submenu-item  ">
-                                    <a href="../page/walimurid/riwayat_pembayaran.php" class="submenu-link">edit data siswa</a>
+                                    <a href="../../page/petugas_administrasi/edit_siswa.php" class="submenu-link">edit data siswa</a>
                                 </li>
                             </ul>
                         </li>

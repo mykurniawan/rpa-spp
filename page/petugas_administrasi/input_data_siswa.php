@@ -1,4 +1,4 @@
-<?php include "../../templates/dashboard/sidebar_administrasi.php" ?>
+<?php include "../../templates/sidebar/sidebar_administrasi.php" ?>
 <div class="page-heading">
     <div class="page-title">
         <div class="row">
@@ -128,4 +128,4 @@
     <!-- // Basic multiple Column Form section end -->
 </div>
 
-<?php include "../../templates/page_wali/footer.php" ?>
+<?php include "./../../templates/footer.php" ?>
