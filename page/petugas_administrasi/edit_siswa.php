@@ -12,14 +12,14 @@ if (!$query) {
     <div class="page-title">
         <div class="row">
             <div class="col-12 col-md-6 order-md-1 order-last">
-                <h3>Form Layout</h3>
-                <p class="text-subtitle text-muted">Multiple form layouts, you can use.</p>
+                <h3>Edit Data Siswa</h3>
+                <p class="text-subtitle text-muted">Masukkan data siswa dengan baik</p>
             </div>
             <div class="col-12 col-md-6 order-md-2 order-first">
                 <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Pembayaran SPP</li>
+                        <li class="breadcrumb-item active" aria-current="page">Edit Data Siswa</li>
                     </ol>
                 </nav>
             </div>
@@ -48,6 +48,10 @@ if (!$query) {
                                     echo '<div class="alert alert-success alert-dismissible fade show" role="alert">Data siswa berhasil dihapus.<button type="button" class="btn-close" aria-label="Close" onclick="this.parentElement.remove()"></button></div>';
                                 } elseif ($msg === 'hapus_gagal') {
                                     echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">Gagal menghapus data siswa.<button type="button" class="btn-close" aria-label="Close" onclick="this.parentElement.remove()"></button></div>';
+                                } elseif ($msg === 'input_sukses') {
+                                    echo '<div class="alert alert-success alert-dismissible fade show" role="alert">Data siswa berhasil ditambahkan.<button type="button" class="btn-close" aria-label="Close" onclick="this.parentElement.remove()"></button></div>';
+                                } elseif ($msg === 'input_gagal') {
+                                    echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">Gagal menambahkan data siswa.<button type="button" class="btn-close" aria-label="Close" onclick="this.parentElement.remove()"></button></div>';
                                 }
                             }
                             ?>
@@ -56,9 +60,15 @@ if (!$query) {
                                     <tr>
                                         <th>No</th>
                                         <th>ID Siswa</th>
-                                        <th>Nama Lengkap</th>
                                         <th>NIS</th>
+                                        <th>Nama Lengkap</th>
+                                   
+                                        <!-- <th>Tempat Lahir</th> -->
+                                        <!-- <th>Tanggal Lahir</th> -->
+                                        <!-- <th>Alamat</th> -->
                                         <th>Kelas</th>
+                                        <!-- <th>Nama Wali</th> -->
+                             
                                         <th>Options</th>
                                     </tr>
                                 </thead>
@@ -73,12 +83,12 @@ if (!$query) {
                                             echo "<tr>";
                                             echo "<td>" . $no++ . "</td>"; // nomor urut
                                             echo "<td>" . htmlspecialchars($data['id_siswa']) . "</td>";
-                                            echo "<td>" . htmlspecialchars($data['nama']) . "</td>";
                                             echo "<td>" . htmlspecialchars($data['nis']) . "</td>";
+                                            echo "<td>" . htmlspecialchars($data['nama']) . "</td>";
                                             echo "<td>" . htmlspecialchars($data['kelas']) . "</td>";
                                             echo "<td>";
                                             echo "<a href='edit_form_siswa.php?id=" . urlencode($data['id_siswa']) . "' class='btn btn-sm btn-primary me-1'><i class='bi bi-pencil'></i> Edit</a>";
-                                            echo "<a href='proses_hapus_data_siswa.php?id=" . urlencode($data['id_siswa']) . "' class='btn btn-sm btn-danger' onclick=\"return confirm('Yakin ingin menghapus data siswa ini?');\"><i class='bi bi-trash'></i> Hapus</a>";
+                                            echo "<a href='../../proses/proses_hapus_data_siswa.php?id=" . urlencode($data['id_siswa']) . "' class='btn btn-sm btn-danger' onclick=\"return confirm('Yakin ingin menghapus data siswa ini?');\"><i class='bi bi-trash'></i> Hapus</a>";
 
                                             echo "</td>";
                                             echo "</tr>";
@@ -93,13 +103,27 @@ if (!$query) {
                                 // Auto-fade and remove alerts after 4 seconds
                                 document.addEventListener('DOMContentLoaded', function() {
                                     var alerts = document.querySelectorAll('.alert');
-                                    alerts.forEach(function(alert) {
-                                        setTimeout(function() {
-                                            alert.style.transition = 'opacity 0.5s ease';
-                                            alert.style.opacity = '0';
-                                            setTimeout(function() { if (alert.parentNode) alert.parentNode.removeChild(alert); }, 500);
-                                        }, 4000);
-                                    });
+                                    if (alerts.length) {
+                                        alerts.forEach(function(alert) {
+                                            setTimeout(function() {
+                                                alert.style.transition = 'opacity 0.5s ease';
+                                                alert.style.opacity = '0';
+                                                setTimeout(function() { if (alert.parentNode) alert.parentNode.removeChild(alert); }, 500);
+                                            }, 4000);
+                                        });
+
+                                        // Remove the `msg` query parameter from URL so refreshing won't re-show the alert
+                                        try {
+                                            var url = new URL(window.location.href);
+                                            if (url.searchParams.has('msg')) {
+                                                url.searchParams.delete('msg');
+                                                // Replace current history entry without reloading
+                                                window.history.replaceState(null, document.title, url.pathname + url.search + url.hash);
+                                            }
+                                        } catch (e) {
+                                            // ignore on older browsers
+                                        }
+                                    }
                                 });
                             </script>
                         </div>

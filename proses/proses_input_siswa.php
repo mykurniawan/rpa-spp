@@ -22,16 +22,13 @@ $query = "INSERT INTO t_siswa (
           )";
 
 
+
 if (mysqli_query($connect, $query)) {
-    echo "<script>
-            alert('Data siswa berhasil disimpan!');
-            window.location.href = '../page/petugas_administrasi/dashboard_administrasi.php'; // ubah sesuai halaman tujuanmu
-          </script>";
+  header("Location: /rpa-spp/page/petugas_administrasi/dashboard_administrasi.php?msg=input_sukses");
+  exit();
 } else {
-    echo "<script>
-            alert('Gagal menyimpan data: " . mysqli_error($connect) . "');
-            window.history.back();
-          </script>";
+  header("Location: /rpa-spp/page/petugas_administrasi/dashboard_administrasi.php?msg=input_gagal");
+  exit();
 }
 
 

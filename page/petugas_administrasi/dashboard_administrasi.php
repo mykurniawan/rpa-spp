@@ -7,14 +7,25 @@ if (!$query) {
 }
 ?>
 
+<?php
+// Notifikasi pesan sukses / gagal input data siswa (dismissible + auto-fade)
+if (isset($_GET['msg'])) {
+    $msg = $_GET['msg'];
+    if ($msg === 'input_sukses') {
+        echo '<div class="alert alert-success alert-dismissible fade show" role="alert">Data siswa berhasil ditambahkan.<button type="button" class="btn-close" aria-label="Close" onclick="this.parentElement.remove()"></button></div>';
+    } elseif ($msg === 'input_gagal') {
+        echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">Gagal menambahkan data siswa.<button type="button" class="btn-close" aria-label="Close" onclick="this.parentElement.remove()"></button></div>';
+    }
+}
+?>
 <div class="page-heading">
-    <h3>Selamat datang di sistem pembayaran spp (nama sekolah)</h3>
+    <h3>Selamat datang di sistem pembayaran spp MI Al-Huda</h3>
 </div>
 <div class="page-content">
     <section class="row">
         <div class="col-12 col-lg-12">
             <div class="row">
-                <div class="col-6 col-lg-3 col-md-6">
+                <!-- <div class="col-6 col-lg-3 col-md-6">
                     <div class="card">
                         <div class="card-body px-4 py-4-5">
                             <div class="row">
@@ -30,8 +41,8 @@ if (!$query) {
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-6 col-lg-3 col-md-6">
+                </div> -->
+                <!-- <div class="col-6 col-lg-3 col-md-6">
                     <div class="card">
                         <div class="card-body px-4 py-4-5">
                             <div class="row">
@@ -47,25 +58,27 @@ if (!$query) {
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
                 <div class="col-6 col-lg-3 col-md-6">
                     <div class="card">
-                        <div class="card-body px-4 py-4-5">
-                            <div class="row">
-                                <div class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start ">
-                                    <div class="stats-icon green mb-2">
-                                        <i class="iconly-boldAdd-User"></i>
+                        <a href="../../page/petugas_administrasi/input_data_siswa.php">
+                            <div class="card-body px-4 py-4-5">
+                                <div class="row">
+                                    <div class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start ">
+                                        <div class="stats-icon green mb-2">
+                                            <i class="iconly-boldAdd-User"></i>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
+                                        <h6 class="text-muted font-semibold">Tambah Siswa</h6>
+                                        <!-- <h6 class="font-extrabold mb-0">1</h6> -->
                                     </div>
                                 </div>
-                                <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
-                                    <h6 class="text-muted font-semibold">Kelas</h6>
-                                    <h6 class="font-extrabold mb-0">1</h6>
-                                </div>
                             </div>
-                        </div>
+                        </a>
                     </div>
                 </div>
-                <div class="col-6 col-lg-3 col-md-6">
+                <!-- <div class="col-6 col-lg-3 col-md-6">
                     <div class="card">
                         <div class="card-body px-4 py-4-5">
                             <div class="row">
@@ -81,7 +94,7 @@ if (!$query) {
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
 
             <div class="row">
@@ -104,10 +117,16 @@ if (!$query) {
                                             <tr>
                                                 <th>No</th>
                                                 <th>ID Siswa</th>
-                                                <th>Nama Lengkap</th>
                                                 <th>NIS</th>
+                                                <th>Nama Lengkap</th>
+                                                <th>Jenis Kelamin</th>
+                                                <th>Tempat Lahir</th>
+                                                <th>Tanggal Lahir</th>
+                                                <th>Alamat</th>
                                                 <th>Kelas</th>
-                                                <th>Status</th>
+                                                <th>Nama Wali</th>
+                                                <th>Pekerjaan Wali</th>
+                                                <th>Asal Sekolah</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -121,9 +140,16 @@ if (!$query) {
                                                     echo "<tr>";
                                                     echo "<td>" . $no++ . "</td>"; // nomor urut
                                                     echo "<td>" . htmlspecialchars($data['id_siswa']) . "</td>";
-                                                    echo "<td>" . htmlspecialchars($data['nama']) . "</td>";
                                                     echo "<td>" . htmlspecialchars($data['nis']) . "</td>";
+                                                    echo "<td>" . htmlspecialchars($data['nama']) . "</td>";
+                                                    echo "<td>" . htmlspecialchars($data['jk']) . "</td>";
+                                                    echo "<td>" . htmlspecialchars($data['tempat_lahir']) . "</td>";
+                                                    echo "<td>" . htmlspecialchars($data['tgl_lahir']) . "</td>";
+                                                    echo "<td>" . htmlspecialchars($data['alamat']) . "</td>";
                                                     echo "<td>" . htmlspecialchars($data['kelas']) . "</td>";
+                                                    echo "<td>" . htmlspecialchars($data['nama_wali']) . "</td>";
+                                                    echo "<td>" . htmlspecialchars($data['pekerjaan_wali']) . "</td>";
+                                                    echo "<td>" . htmlspecialchars($data['asal_sekolah']) . "</td>";
                                                     echo "<td>";
 
                                                     // tampilkan status aktif/nonaktif dengan badge warna
@@ -141,6 +167,31 @@ if (!$query) {
                                             }
                                             ?>
                                         </tbody>
+                                        <script>
+                                            // Auto-fade and remove alerts after 4 seconds
+                                            document.addEventListener('DOMContentLoaded', function() {
+                                                var alerts = document.querySelectorAll('.alert');
+                                                if (alerts.length) {
+                                                    alerts.forEach(function(alert) {
+                                                        setTimeout(function() {
+                                                            alert.style.transition = 'opacity 0.5s ease';
+                                                            alert.style.opacity = '0';
+                                                            setTimeout(function() {
+                                                                if (alert.parentNode) alert.parentNode.removeChild(alert);
+                                                            }, 500);
+                                                        }, 4000);
+                                                    });
+                                                    // Remove the `msg` query parameter from URL so refreshing won't re-show the alert
+                                                    try {
+                                                        var url = new URL(window.location.href);
+                                                        if (url.searchParams.has('msg')) {
+                                                            url.searchParams.delete('msg');
+                                                            window.history.replaceState(null, document.title, url.pathname + url.search + url.hash);
+                                                        }
+                                                    } catch (e) {}
+                                                }
+                                            });
+                                        </script>
                                     </table>
                                 </div>
                             </div>
@@ -214,4 +265,34 @@ if (!$query) {
         </div> -->
     </section>
 </div>
+
+<script>
+    // Auto-fade and remove alerts after 4 seconds
+    document.addEventListener('DOMContentLoaded', function() {
+        var alerts = document.querySelectorAll('.alert');
+        if (alerts.length) {
+            alerts.forEach(function(alert) {
+                setTimeout(function() {
+                    alert.style.transition = 'opacity 0.5s ease';
+                    alert.style.opacity = '0';
+                    setTimeout(function() {
+                        if (alert.parentNode) alert.parentNode.removeChild(alert);
+                    }, 500);
+                }, 4000);
+            });
+
+            // Remove the `msg` query parameter from URL so refreshing won't re-show the alert
+            try {
+                var url = new URL(window.location.href);
+                if (url.searchParams.has('msg')) {
+                    url.searchParams.delete('msg');
+                    // Replace current history entry without reloading
+                    window.history.replaceState(null, document.title, url.pathname + url.search + url.hash);
+                }
+            } catch (e) {
+                // ignore on older browsers
+            }
+        }
+    });
+</script>
 <?php include "./../../templates/footer.php" ?>

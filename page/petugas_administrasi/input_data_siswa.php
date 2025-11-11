@@ -3,14 +3,14 @@
     <div class="page-title">
         <div class="row">
             <div class="col-12 col-md-6 order-md-1 order-last">
-                <h3>Form Layout</h3>
-                <p class="text-subtitle text-muted">Multiple form layouts, you can use.</p>
+                <h3>Input Data Siswa</h3>
+                <p class="text-subtitle text-muted">Masukkan data siswa dengan baik</p>
             </div>
             <div class="col-12 col-md-6 order-md-2 order-first">
                 <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Pembayaran SPP</li>
+                        <li class="breadcrumb-item active" aria-current="page">Input Data Siswa</li>
                     </ol>
                 </nav>
             </div>
@@ -47,7 +47,7 @@
                                         <div class="form-group">
                                             <label for="city-column">Jenis Kelamin</label>
                                             <fieldset class="form-group">
-                                                <select class="form-select" id="jk" name="jk">
+                                                <select class="form-select" id="jk" name="jk" required>
                                                     <option value="">--Pilih--</option>
                                                     <option value="Laki-laki">Laki-laki</option>
                                                     <option value="Perempuan">Perempuan</option>
@@ -79,8 +79,19 @@
                                     <div class="col-md-6 col-12">
                                         <div class="form-group">
                                             <label for="email-id-column">Kelas</label>
-                                            <input type="text" id="kelas" class="form-control"
-                                                name="kelas" placeholder="Kelas" required>
+                                            <fieldset class="form-group">
+                                                <select class="form-select" id="kelas" name="kelas" required>
+                                                    <option value="">--Pilih Kelas--</option>
+                                                    <option value="1">1</option>
+                                                    <option value="2">2</option>
+                                                    <option value="3">3</option>
+                                                    <option value="4">4</option>
+                                                    <option value="5">5</option>
+                                                    <option value="6">6</option>
+                                                </select >
+                                            </fieldset>
+                                            <!-- <input type="text" id="kelas" class="form-control"
+                                                name="kelas" placeholder="Kelas" required> -->
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-12">
@@ -102,7 +113,7 @@
                                         <div class="form-group">
                                             <label for="email-id-column">Asal Sekolah</label>
                                             <input type="text" id="asal_sekolah" class="form-control"
-                                                name="asal_sekolah" placeholder="Asal Sekolah"  required>
+                                                name="asal_sekolah" placeholder="Asal Sekolah" required>
                                         </div>
                                     </div>
                                     <!-- <div class="form-group col-12">
@@ -114,7 +125,7 @@
                                         </div>
                                     </div> -->
                                     <div class="col-12 d-flex justify-content-end">
-                                        <button type="submit" class="btn btn-primary me-1 mb-1">Submit</button>
+                                        <button type="submit" class="btn btn-primary me-1 mb-1">Simpan</button>
                                         <button type="reset" class="btn btn-light-secondary me-1 mb-1">Reset</button>
                                     </div>
                                 </div>
@@ -127,5 +138,7 @@
     </section>
     <!-- // Basic multiple Column Form section end -->
 </div>
+
+
 
 <?php include "./../../templates/footer.php" ?>

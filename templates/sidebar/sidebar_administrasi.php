@@ -26,7 +26,7 @@
                 <div class="sidebar-header position-relative">
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="logo">
-                            <a href="index.html"><img src="/rpa-spp/assets/compiled/svg/logo.svg" alt="Logo" srcset=""></a>
+                            <a href="#"><img src="/rpa-spp/assets/compiled/svg/favicon.svg" alt="Logo" srcset=""></a>
                         </div>
                         <div class="theme-toggle d-flex gap-2  align-items-center mt-2">
                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true"
@@ -81,9 +81,9 @@
 
                             <ul class="submenu ">
 
-                                <li class="submenu-item  ">
-                                    <a href="../page/walimurid/pembayaran_spp.php" class="submenu-link">Data siswa</a>
-                                </li>
+                                <!-- <li class="submenu-item  ">
+                                    <a href="../../page/petugas_administrasi/data_siswa.php" class="submenu-link">Data siswa</a>
+                                </li> -->
 
                                 <li class="submenu-item  ">
                                     <a href="../../page/petugas_administrasi/input_data_siswa.php" class="submenu-link">Input data siswa</a>
