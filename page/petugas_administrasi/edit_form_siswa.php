@@ -28,7 +28,7 @@ if (!$data) {
                     <h4>Edit Siswa</h4>
                 </div>
                 <div class="card-body">
-                    <form action="proses_edit_data_siswa.php" method="POST">
+                    <form action="../../proses/proses_edit_data_siswa.php" method="POST">
                         <input type="hidden" name="id_siswa" value="<?php echo htmlspecialchars($data['id_siswa']); ?>">
                         <div class="mb-3">
                             <label for="nama" class="form-label">Nama Lengkap</label>

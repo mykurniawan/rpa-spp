@@ -36,6 +36,21 @@ if (!$query) {
                     </div>
                     <div class="card-content">
                         <div class="card-body">
+                            <?php
+                            // Notifikasi pesan sukses / gagal dari proses edit/hapus (dismissible + auto-fade)
+                            if (isset($_GET['msg'])) {
+                                $msg = $_GET['msg'];
+                                if ($msg === 'edit_sukses') {
+                                    echo '<div class="alert alert-success alert-dismissible fade show" role="alert">Data siswa berhasil diperbarui.<button type="button" class="btn-close" aria-label="Close" onclick="this.parentElement.remove()"></button></div>';
+                                } elseif ($msg === 'edit_gagal') {
+                                    echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">Terjadi kesalahan saat memperbarui data.<button type="button" class="btn-close" aria-label="Close" onclick="this.parentElement.remove()"></button></div>';
+                                } elseif ($msg === 'hapus_sukses') {
+                                    echo '<div class="alert alert-success alert-dismissible fade show" role="alert">Data siswa berhasil dihapus.<button type="button" class="btn-close" aria-label="Close" onclick="this.parentElement.remove()"></button></div>';
+                                } elseif ($msg === 'hapus_gagal') {
+                                    echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">Gagal menghapus data siswa.<button type="button" class="btn-close" aria-label="Close" onclick="this.parentElement.remove()"></button></div>';
+                                }
+                            }
+                            ?>
                             <table class="table table-striped" id="table1">
                                 <thead>
                                     <tr>
@@ -74,6 +89,19 @@ if (!$query) {
                                     ?>
                                 </tbody>
                             </table>
+                            <script>
+                                // Auto-fade and remove alerts after 4 seconds
+                                document.addEventListener('DOMContentLoaded', function() {
+                                    var alerts = document.querySelectorAll('.alert');
+                                    alerts.forEach(function(alert) {
+                                        setTimeout(function() {
+                                            alert.style.transition = 'opacity 0.5s ease';
+                                            alert.style.opacity = '0';
+                                            setTimeout(function() { if (alert.parentNode) alert.parentNode.removeChild(alert); }, 500);
+                                        }, 4000);
+                                    });
+                                });
+                            </script>
                         </div>
                     </div>
                 </div>
