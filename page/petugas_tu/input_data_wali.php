@@ -1,16 +1,16 @@
-<?php include "../../templates/sidebar/sidebar_administrasi.php" ?>
+<?php include "../../templates/sidebar/sidebar_tu.php" ?>
 <div class="page-heading">
     <div class="page-title">
         <div class="row">
             <div class="col-12 col-md-6 order-md-1 order-last">
-                <h3>Input Data Siswa</h3>
-                <p class="text-subtitle text-muted">Masukkan data siswa dengan baik</p>
+                <h3>Input Akun Wali Siswa</h3>
+                <p class="text-subtitle text-muted">Masukkan data wali siswa dengan baik</p>
             </div>
             <div class="col-12 col-md-6 order-md-2 order-first">
                 <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Input Data Siswa</li>
+                        <li class="breadcrumb-item active" aria-current="page">Input Data Wali Siswa</li>
                     </ol>
                 </nav>
             </div>
@@ -23,17 +23,24 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title">Masukkan Data Siswa</h4>
+                        <h4 class="card-title">Masukkan Data Wali Siswa</h4>
                     </div>
                     <div class="card-content">
                         <div class="card-body">
-                            <form class="form" method="post" action="../../proses/proses_input_siswa.php">
+                            <form class="form" method="post" action="../../proses/proses_input_wali.php">
                                 <div class="row">
                                     <div class="col-md-6 col-12">
                                         <div class="form-group">
-                                            <label for="last-name-column">NIS</label>
-                                            <input type="text" id="nis" class="form-control"
-                                                placeholder="NIS" name="nis">
+                                            <label for="last-name-column">Username</label>
+                                            <input type="text" id="username" class="form-control"
+                                                placeholder="Username" name="username">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-12">
+                                        <div class="form-group">
+                                            <label for="last-name-column">Password</label>
+                                            <input type="password" id="password" class="form-control"
+                                                placeholder="Password" name="password">
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-12">
@@ -78,52 +85,34 @@
                                     </div>
                                     <div class="col-md-6 col-12">
                                         <div class="form-group">
-                                            <label for="email-id-column">Kelas</label>
-                                            <fieldset class="form-group">
-                                                <select class="form-select" id="kelas" name="kelas" required>
-                                                    <option value="">--Pilih Kelas--</option>
-                                                    <option value="1">1</option>
-                                                    <option value="2">2</option>
-                                                    <option value="3">3</option>
-                                                    <option value="4">4</option>
-                                                    <option value="5">5</option>
-                                                    <option value="6">6</option>
-                                                </select >
-                                            </fieldset>
-                                            <!-- <input type="text" id="kelas" class="form-control"
-                                                name="kelas" placeholder="Kelas" required> -->
+                                            <label for="email-id-column">No. Telepon</label>
+                                            <input type="text" id="no_telepon" class="form-control"
+                                                name="no_telepon" placeholder="No. Telepon" required>
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-12">
                                         <div class="form-group">
-                                            <label for="email-id-column">Nama Walimurid</label>
-                                            <input type="text" id="nama_walimurid" class="form-control"
-                                                name="nama_walimurid" placeholder="Nama Walimurid" required>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6 col-12">
-                                        <div class="form-group">
-                                            <label for="email-id-column">Pekerjaan Walimurid</label>
-                                            <input type="text" id="pekerjaan_walimurid" class="form-control"
-                                                name="pekerjaan_walimurid" placeholder="Pekerjaan Walimurid" required>
+                                            <label for="email-id-column">email</label>
+                                            <input type="text" id="email" class="form-control"
+                                                name="email" placeholder="email" required>
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-12">
                                         <div class="form-group">
-                                            <label for="email-id-column">Asal Sekolah</label>
-                                            <input type="text" id="asal_sekolah" class="form-control"
-                                                name="asal_sekolah" placeholder="Asal Sekolah" required>
+                                            <label for="id_siswa" class="form-label">Nama Siswa</label>
+                                            <select class="form-select" id="id_siswa" name="id_siswa" required>
+                                                <option value="">--Pilih Siswa--</option>
+                                                <?php
+                                                include_once "../../connect.php";
+                                                $siswa_query = mysqli_query($connect, "SELECT id_siswa, nama FROM t_siswa ORDER BY nama ASC");
+                                                while ($siswa = mysqli_fetch_assoc($siswa_query)) {
+                                                    echo '<option value="' . htmlspecialchars($siswa['id_siswa']) . '">' . htmlspecialchars($siswa['nama']) . '</option>';
+                                                }
+                                                ?>
+                                            </select>
                                         </div>
                                     </div>
-                                    <!-- <div class="form-group col-12">
-                                        <div class='form-check'>
-                                            <div class="checkbox">
-                                                <input type="checkbox" id="checkbox5" class='form-check-input' checked>
-                                                <label for="checkbox5">Remember Me</label>
-                                            </div>
-                                        </div>
-                                    </div> -->
+                               
                                     <div class="col-12 d-flex justify-content-end">
                                         <button type="submit" class="btn btn-primary me-1 mb-1">Simpan</button>
                                         <button type="reset" class="btn btn-light-secondary me-1 mb-1">Reset</button>

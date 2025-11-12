@@ -1,6 +1,6 @@
-<?php include "../../templates/sidebar/sidebar_administrasi.php" ?>
+<?php include "../../templates/sidebar/sidebar_tu.php" ?>
 <?php include "../../connect.php";
-$query = mysqli_query($connect, "SELECT * FROM t_siswa");
+$query = mysqli_query($connect, "SELECT t_wali.*, t_siswa.nama AS nama_siswa FROM t_wali LEFT JOIN t_siswa ON t_wali.id_siswa = t_siswa.id_siswa");
 
 if (!$query) {
     die("Query gagal dijalankan: " . mysqli_error($connect));
@@ -12,9 +12,9 @@ if (!$query) {
 if (isset($_GET['msg'])) {
     $msg = $_GET['msg'];
     if ($msg === 'input_sukses') {
-        echo '<div class="alert alert-success alert-dismissible fade show" role="alert">Data siswa berhasil ditambahkan.<button type="button" class="btn-close" aria-label="Close" onclick="this.parentElement.remove()"></button></div>';
+        echo '<div class="alert alert-success alert-dismissible fade show" role="alert">Data wali berhasil ditambahkan.<button type="button" class="btn-close" aria-label="Close" onclick="this.parentElement.remove()"></button></div>';
     } elseif ($msg === 'input_gagal') {
-        echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">Gagal menambahkan data siswa.<button type="button" class="btn-close" aria-label="Close" onclick="this.parentElement.remove()"></button></div>';
+        echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">Gagal menambahkan data wali.<button type="button" class="btn-close" aria-label="Close" onclick="this.parentElement.remove()"></button></div>';
     }
 }
 ?>
@@ -25,43 +25,10 @@ if (isset($_GET['msg'])) {
     <section class="row">
         <div class="col-12 col-lg-12">
             <div class="row">
-                <!-- <div class="col-6 col-lg-3 col-md-6">
-                    <div class="card">
-                        <div class="card-body px-4 py-4-5">
-                            <div class="row">
-                                <div class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start ">
-                                    <div class="stats-icon purple mb-2">
-                                        <i class="iconly-boldShow"></i>
-                                    </div>
-                                </div>
-                                <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
-                                    <h6 class="text-muted font-semibold">Biaya SPP</h6>
-                                    <h6 class="font-extrabold mb-0">300.000 </h6>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
-                <!-- <div class="col-6 col-lg-3 col-md-6">
-                    <div class="card">
-                        <div class="card-body px-4 py-4-5">
-                            <div class="row">
-                                <div class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start ">
-                                    <div class="stats-icon blue mb-2">
-                                        <i class="iconly-boldProfile"></i>
-                                    </div>
-                                </div>
-                                <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
-                                    <h6 class="text-muted font-semibold">Jumlah Siswa</h6>
-                                    <h6 class="font-extrabold mb-0">NISN/id</h6>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
+          
                 <div class="col-6 col-lg-3 col-md-6">
                     <div class="card">
-                        <a href="../../page/petugas_administrasi/input_data_siswa.php">
+                        <a href="../../page/petugas_tu/input_data_wali.php">
                             <div class="card-body px-4 py-4-5">
                                 <div class="row">
                                     <div class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start ">
@@ -70,7 +37,7 @@ if (isset($_GET['msg'])) {
                                         </div>
                                     </div>
                                     <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
-                                        <h6 class="text-muted font-semibold">Tambah Siswa</h6>
+                                        <h6 class="text-muted font-semibold">Tambah Akun Wali</h6>
                                         <!-- <h6 class="font-extrabold mb-0">1</h6> -->
                                     </div>
                                 </div>
@@ -101,7 +68,7 @@ if (isset($_GET['msg'])) {
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4>Daftar Siswa</h4>
+                            <h4>Daftar Akun Wali Siswa</h4>
                         </div>
                         <div class="card-body">
                             <div class="card">
@@ -116,17 +83,17 @@ if (isset($_GET['msg'])) {
                                         <thead>
                                             <tr>
                                                 <th>No</th>
-                                                <th>ID Siswa</th>
-                                                <th>NIS</th>
+                                                <th>ID Wali</th>
+                                                <th>Username</th>
+                                                <th>Password</th>
                                                 <th>Nama Lengkap</th>
                                                 <th>Jenis Kelamin</th>
                                                 <th>Tempat Lahir</th>
                                                 <th>Tanggal Lahir</th>
                                                 <th>Alamat</th>
-                                                <th>Kelas</th>
-                                                <th>Nama Wali</th>
-                                                <th>Pekerjaan Wali</th>
-                                                <th>Asal Sekolah</th>
+                                                <th>No Tlp</th>
+                                                <th>email</th>
+                                                <th>Siswa</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -139,28 +106,18 @@ if (isset($_GET['msg'])) {
                                                 while ($data = mysqli_fetch_assoc($query)) {
                                                     echo "<tr>";
                                                     echo "<td>" . $no++ . "</td>"; // nomor urut
-                                                    echo "<td>" . htmlspecialchars($data['id_siswa']) . "</td>";
-                                                    echo "<td>" . htmlspecialchars($data['nis']) . "</td>";
+                                                    echo "<td>" . htmlspecialchars($data['id_wali']) . "</td>";
+                                                    echo "<td>" . htmlspecialchars($data['username']) . "</td>";
+                                                    echo "<td>" . htmlspecialchars($data['password']) . "</td>";
                                                     echo "<td>" . htmlspecialchars($data['nama']) . "</td>";
-                                                    echo "<td>" . htmlspecialchars($data['jk']) . "</td>";
+                                                    echo "<td>" . htmlspecialchars($data['jenis_kelamin']) . "</td>";
                                                     echo "<td>" . htmlspecialchars($data['tempat_lahir']) . "</td>";
                                                     echo "<td>" . htmlspecialchars($data['tgl_lahir']) . "</td>";
                                                     echo "<td>" . htmlspecialchars($data['alamat']) . "</td>";
-                                                    echo "<td>" . htmlspecialchars($data['kelas']) . "</td>";
-                                                    echo "<td>" . htmlspecialchars($data['nama_wali']) . "</td>";
-                                                    echo "<td>" . htmlspecialchars($data['pekerjaan_wali']) . "</td>";
-                                                    echo "<td>" . htmlspecialchars($data['asal_sekolah']) . "</td>";
+                                                    echo "<td>" . htmlspecialchars($data['no_telpon']) . "</td>";
+                                                    echo "<td>" . htmlspecialchars($data['email']) . "</td>";
+                                                    echo "<td>" . htmlspecialchars($data['nama_siswa']) . "</td>";
                                                     echo "<td>";
-
-                                                    // tampilkan status aktif/nonaktif dengan badge warna
-                                                    // if (strtolower($data['status']) == 'aktif') {
-                                                    //     echo "<span class='badge bg-success'>Aktif</span>";
-                                                    // } else {
-                                                    //     echo "<span class='badge bg-danger'>Nonaktif</span>";
-                                                    // }
-
-                                                    // echo "</td>";
-                                                    // echo "</tr>";
                                                 }
                                             } else {
                                                 echo "<tr><td colspan='6' class='text-center'>Belum ada data siswa</td></tr>";

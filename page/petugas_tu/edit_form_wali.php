@@ -3,20 +3,22 @@ include "../../connect.php";
 
 // Ambil id siswa dari parameter GET
 if (!isset($_GET['id'])) {
-    header("Location: edit_siswa.php");
+    header("Location: edit_wali.php");
     exit();
 }
-$id_siswa = $_GET['id'];
+$id_wali = $_GET['id'];
 
 // Ambil data siswa dari database
-$query = mysqli_query($connect, "SELECT * FROM t_siswa WHERE id_siswa='" . mysqli_real_escape_string($connect, $id_siswa) . "'");
+// Query data wali sesuai id_wali yang dipilih
+$query = mysqli_query($connect, "SELECT t_wali.*, t_siswa.nama AS nama_siswa FROM t_wali LEFT JOIN t_siswa ON t_wali.id_siswa = t_siswa.id_siswa WHERE t_wali.id_wali='" . mysqli_real_escape_string($connect, $id_wali) . "'");
+// $query = mysqli_query($connect, "SELECT * FROM t_wali WHERE id_wali='" . mysqli_real_escape_string($connect, $id_wali) . "'");
 $data = mysqli_fetch_assoc($query);
 if (!$data) {
     echo "<div class='alert alert-danger'>Data siswa tidak ditemukan.</div>";
     exit();
 }
 ?>
-<?php include "../../templates/sidebar/sidebar_administrasi.php"; ?>
+<?php include "../../templates/sidebar/sidebar_tu.php"; ?>
 <div class="page-heading">
     <h3>Edit Data Siswa</h3>
 </div>
@@ -28,11 +30,15 @@ if (!$data) {
                     <h4>Edit Siswa</h4>
                 </div>
                 <div class="card-body">
-                    <form action="../../proses/proses_edit_data_siswa.php" method="POST">
-                        <input type="hidden" name="id_siswa" value="<?php echo htmlspecialchars($data['id_siswa']); ?>">
+                    <form action="../../proses/proses_edit_data_wali.php" method="POST">
+                        <input type="hidden" name="id_wali" value="<?php echo htmlspecialchars($data['id_wali']); ?>">
                         <div class="mb-3">
-                            <label for="nis" class="form-label">NIS</label>
-                            <input type="text" class="form-control" id="nis" name="nis" value="<?php echo htmlspecialchars($data['nis']); ?>" required>
+                            <label for="username" class="form-label">Username</label>
+                            <input type="text" class="form-control" id="username" name="username" value="<?php echo htmlspecialchars($data['username']); ?>" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="password" name="password" value="<?php echo htmlspecialchars($data['password']); ?>" required>
                         </div>
                         <div class="mb-3">
                             <label for="nama" class="form-label">Nama Lengkap</label>
@@ -40,10 +46,10 @@ if (!$data) {
                         </div>
                         <div class="mb-3">
                             <label for="jenis_kelamin" class="form-label">Jenis Kelamin</label>
-                            <select class="form-select" id="jk" name="jk" required>
+                            <select class="form-select" id="jenis_kelamin" name="jenis_kelamin" required>
                                 <option value="">--Pilih--</option>
-                                <option value="Laki-laki" <?php if ($data['jk'] === 'Laki-laki') echo 'selected'; ?>>Laki-laki</option>
-                                <option value="Perempuan" <?php if ($data['jk'] === 'Perempuan') echo 'selected'; ?>>Perempuan</option>
+                                <option value="Laki-laki" <?php if ($data['jenis_kelamin'] === 'Laki-laki') echo 'selected'; ?>>Laki-laki</option>
+                                <option value="Perempuan" <?php if ($data['jenis_kelamin'] === 'Perempuan') echo 'selected'; ?>>Perempuan</option>
                             </select>
                         </div>
                         <div class="mb-3">
@@ -59,32 +65,28 @@ if (!$data) {
                             <input type="text" class="form-control" id="alamat" name="alamat" value="<?php echo htmlspecialchars($data['alamat']); ?>" required>
                         </div>
                         <div class="mb-3">
-                            <label for="nama_wali" class="form-label">Nama Wali</label>
-                            <input type="text" class="form-control" id="nama_wali" name="nama_wali" value="<?php echo htmlspecialchars($data['nama_wali']); ?>" required>
+                            <label for="no_telpon" class="form-label">No. Telepon</label>
+                            <input type="text" class="form-control" id="no_telpon" name="no_telpon" value="<?php echo htmlspecialchars($data['no_telpon']); ?>" required>
                         </div>
                         <div class="mb-3">
-                            <label for="pekerjaan_wali" class="form-label">Pekerjaan Wali</label>
-                            <input type="text" class="form-control" id="pekerjaan_wali" name="pekerjaan_wali" value="<?php echo htmlspecialchars($data['pekerjaan_wali']); ?>" required>
+                            <label for="email" class="form-label">Email</label>
+                            <input type="text" class="form-control" id="email" name="email" value="<?php echo htmlspecialchars($data['email']); ?>" required>
                         </div>
                         <div class="mb-3">
-                            <label for="kelas" class="form-label">Kelas</label>
-                            <select class="form-select" id="kelas" name="kelas" required>
-                                <option value="">--Pilih Kelas--</option>
-                                <option value="1" <?php if ($data['kelas'] === '1') echo 'selected'; ?>>1</option>
-                                <option value="2" <?php if ($data['kelas'] === '2') echo 'selected'; ?>>2</option>
-                                <option value="3" <?php if ($data['kelas'] === '3') echo 'selected'; ?>>3</option>
-                                <option value="4" <?php if ($data['kelas'] === '4') echo 'selected'; ?>>4</option>
-                                <option value="5" <?php if ($data['kelas'] === '5') echo 'selected'; ?>>5</option>
-                                <option value="6" <?php if ($data['kelas'] === '6') echo 'selected'; ?>>6</option>
+                            <label for="id_siswa" class="form-label">Nama Siswa</label>
+                            <select class="form-select" id="id_siswa" name="id_siswa" required>
+                                <option value="">--Pilih Siswa--</option>
+                                <?php
+                                $siswa_query = mysqli_query($connect, "SELECT id_siswa, nama FROM t_siswa ORDER BY nama ASC");
+                                while ($siswa = mysqli_fetch_assoc($siswa_query)) {
+                                    $selected = ($siswa['id_siswa'] == $data['id_siswa']) ? 'selected' : '';
+                                    echo '<option value="' . htmlspecialchars($siswa['id_siswa']) . '" ' . $selected . '>' . htmlspecialchars($siswa['nama']) . '</option>';
+                                }
+                                ?>
                             </select>
                         </div>
-
-                        <div class="mb-3">
-                            <label for="asal_sekolah" class="form-label">Asal Sekolah</label>
-                            <input type="text" class="form-control" id="asal_sekolah" name="asal_sekolah" value="<?php echo htmlspecialchars($data['asal_sekolah']); ?>" required>
-                        </div>
                         <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
-                        <a href="edit_siswa.php" class="btn btn-secondary">Batal</a>
+                        <a href="edit_wali.php" class="btn btn-secondary">Batal</a>
                     </form>
                 </div>
             </div>

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard - Mazer Admin Dashboard</title>
+    <title>Dashboard - Petugas TU</title>
 
 
 
@@ -66,9 +66,9 @@
                         <!-- <li class="sidebar-title">Menu</li> -->
                         <li
                             class="sidebar-item active ">
-                            <a href="../../page/petugas_administrasi/dashboard_administrasi.php" class='sidebar-link'>
+                            <a href="../../page/petugas_tu/dashboard_tu.php" class='sidebar-link'>
                                 <i class="bi bi-grid-fill"></i>
-                                <span>Dashboard Petugas Administrasi</span>
+                                <span>Dashboard Petugas TU</span>
                             </a>
                         </li>
                         <li class="sidebar-title">Data</li>
@@ -76,15 +76,15 @@
                             class="sidebar-item  has-sub">
                             <a href="#" class='sidebar-link'>
                                 <i class="bi bi-stack"></i>
-                                <span>Data Siswa</span>
+                                <span>Data Akun Wali</span>
                             </a>
 
                             <ul class="submenu ">
                                 <li class="submenu-item  ">
-                                    <a href="../../page/petugas_administrasi/input_data_siswa.php" class="submenu-link">Input data siswa</a>
+                                    <a href="../../page/petugas_tu/input_data_wali.php" class="submenu-link">Input data wali</a>
                                 </li>
                                 <li class="submenu-item  ">
-                                    <a href="../../page/petugas_administrasi/edit_siswa.php" class="submenu-link">edit data siswa</a>
+                                    <a href="../../page/petugas_tu/edit_wali.php" class="submenu-link">edit data wali</a>
                                 </li>
                             </ul>
                         </li>
