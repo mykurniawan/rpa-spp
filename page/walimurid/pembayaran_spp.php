@@ -1,10 +1,12 @@
-<?php include "../../templates/page_wali/sidebar_wali.php" ?>
+<?php include "../../templates/sidebar/sidebar_wali.php"; ?>
+<?php include "../../connect.php"; ?>
+
 <div class="page-heading">
     <div class="page-title">
         <div class="row">
             <div class="col-12 col-md-6 order-md-1 order-last">
-                <h3>Form Layout</h3>
-                <p class="text-subtitle text-muted">Multiple form layouts, you can use.</p>
+                <h3>Form Pembayaran SPP</h3>
+                <p class="text-subtitle text-muted">Pembayaran SPP MI Al-Huda</p>
             </div>
             <div class="col-12 col-md-6 order-md-2 order-first">
                 <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
@@ -17,8 +19,142 @@
         </div>
     </div>
 
+
+    <!-- // Basic multiple Column Form section start -->
+    <!-- <section id="multiple-column-form">
+        <div class="row match-height">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">Multiple Column</h4>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-body">
+                            <form class="form">
+                                <div class="row">
+                                    <div class="col-md-6 col-12">
+                                        <div class="form-group">
+                                            <label for="first-name-column">Tanggal Bayar</label>
+                                            <input type="date" id="tgl_bayar" class="form-control"
+                                                placeholder="Tanggal Bayar" name="tgl_bayar">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-12">
+                                        <div class="form-group">
+                                            <label for="last-name-column">Semester</label>
+                                            <input type="text" id="last-name-column" class="form-control"
+                                                placeholder="Semester" name="semester">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-12">
+                                        <div class="form-group">
+                                            <label for="city-column">Masukkan Nominal Jumlah Bayar</label>
+                                            <input type="text" id="city-column" class="form-control" placeholder="Contoh : 300000"
+                                                name="jumlah_bayar">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-12">
+                                        <div class="form-group">
+                                            <label for="country-floating">Kwitansi</label>
+                                            <input type="file" id="kwitansi" class="form-control"
+                                                name="kwitansi" placeholder="kwitansi">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-12">
+                                        <div class="form-group">
+                                            <label for="company-column">Catatan</label>
+                                            <input type="text" id="catatan" class="form-control"
+                                                name="catatan" placeholder="Catatan (optional)">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-12">
+                                        <div class="form-group">
+                                            <label for="email-id-column">Email</label>
+                                            <input type="email" id="email-id-column" class="form-control"
+                                                name="email-id-column" placeholder="Email">
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-12">
+                                        <div class='form-check'>
+                                            <div class="checkbox">
+                                                <input type="checkbox" id="checkbox5" class='form-check-input' checked>
+                                                <label for="checkbox5">Remember Me</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 d-flex justify-content-end">
+                                        <button type="submit" class="btn btn-primary me-1 mb-1">Submit</button>
+                                        <button type="reset" class="btn btn-light-secondary me-1 mb-1">Reset</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section> -->
+    <!-- // Basic multiple Column Form section end -->
+
     <!-- Basic Horizontal form layout section start -->
     <section id="basic-horizontal-layouts">
+        <div class="row match-height">
+            <div class="col-md-12 col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">Masukkan Data Pembayaran SPP</h4>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-body">
+                            <form class="form form-horizontal" method="post" action="proses_pembayaran_spp.php" enctype="multipart/form-data">
+                                <div class="form-body">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <label for="first-name-horizontal">Tanggal Bayar</label>
+                                        </div>
+                                        <div class="col-md-8 form-group">
+                                            <input type="date" id="tgl_bayar" class="form-control" name="tgl_bayar"
+                                                placeholder="Tanggal Bayar">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="kwitansi">Kwitansi</label>
+                                        </div>
+                                        <div class="col-md-8 form-group">
+                                            <input type="file" id="kwitansi" class="form-control" name="kwitansi"
+                                                placeholder="Kwitansi">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="first-name-horizontal">Masukkan Jumlah Nominal</label>
+                                        </div>
+                                        <div class="col-md-8 form-group">
+                                            <input type="number" id="jumlah_nominal" class="form-control" name="jumlah_nominal"
+                                                placeholder="Contoh : 300000">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="first-name-horizontal">Catatan</label>
+                                        </div>
+                                        <div class="col-md-8 form-group">
+                                            <input type="text" id="catatan" class="form-control" name="catatan"
+                                                placeholder="Catatan (optional)">
+                                        </div>
+                                        <div class="col-sm-12 d-flex justify-content-end">
+                                            <button type="submit" class="btn btn-primary me-1 mb-1">Submit</button>
+                                            <button type="reset"
+                                                class="btn btn-light-secondary me-1 mb-1">Reset</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </section>
+    <!-- // Basic Horizontal form layout section end -->
+    <!-- Basic Horizontal form layout section start -->
+    <!-- <section id="basic-horizontal-layouts">
         <div class="row match-height">
             <div class="col-md-6 col-12">
                 <div class="card">
@@ -34,7 +170,7 @@
                                             <label for="first-name-horizontal">First Name</label>
                                         </div>
                                         <div class="col-md-8 form-group">
-                                            <input type="text" id="first-name-horizontal" class="form-control" name="fname"
+                                            <input type="file" id="first-name-horizontal" class="form-control" name="fname"
                                                 placeholder="First Name">
                                         </div>
                                         <div class="col-md-4">
@@ -165,11 +301,11 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> -->
     <!-- // Basic Horizontal form layout section end -->
 
     <!-- Basic Vertical form layout section start -->
-    <section id="basic-vertical-layouts">
+    <!-- <section id="basic-vertical-layouts">
         <div class="row match-height">
             <div class="col-md-6 col-12">
                 <div class="card">
@@ -311,85 +447,11 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> -->
     <!-- // Basic Vertical form layout section end -->
 
 
-    <!-- // Basic multiple Column Form section start -->
-    <section id="multiple-column-form">
-        <div class="row match-height">
-            <div class="col-12">
-                <div class="card">
-                    <div class="card-header">
-                        <h4 class="card-title">Multiple Column</h4>
-                    </div>
-                    <div class="card-content">
-                        <div class="card-body">
-                            <form class="form">
-                                <div class="row">
-                                    <div class="col-md-6 col-12">
-                                        <div class="form-group">
-                                            <label for="first-name-column">First Name</label>
-                                            <input type="text" id="first-name-column" class="form-control"
-                                                placeholder="First Name" name="fname-column">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 col-12">
-                                        <div class="form-group">
-                                            <label for="last-name-column">Last Name</label>
-                                            <input type="text" id="last-name-column" class="form-control"
-                                                placeholder="Last Name" name="lname-column">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 col-12">
-                                        <div class="form-group">
-                                            <label for="city-column">City</label>
-                                            <input type="text" id="city-column" class="form-control" placeholder="City"
-                                                name="city-column">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 col-12">
-                                        <div class="form-group">
-                                            <label for="country-floating">Country</label>
-                                            <input type="text" id="country-floating" class="form-control"
-                                                name="country-floating" placeholder="Country">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 col-12">
-                                        <div class="form-group">
-                                            <label for="company-column">Company</label>
-                                            <input type="text" id="company-column" class="form-control"
-                                                name="company-column" placeholder="Company">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 col-12">
-                                        <div class="form-group">
-                                            <label for="email-id-column">Email</label>
-                                            <input type="email" id="email-id-column" class="form-control"
-                                                name="email-id-column" placeholder="Email">
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-12">
-                                        <div class='form-check'>
-                                            <div class="checkbox">
-                                                <input type="checkbox" id="checkbox5" class='form-check-input' checked>
-                                                <label for="checkbox5">Remember Me</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 d-flex justify-content-end">
-                                        <button type="submit" class="btn btn-primary me-1 mb-1">Submit</button>
-                                        <button type="reset" class="btn btn-light-secondary me-1 mb-1">Reset</button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- // Basic multiple Column Form section end -->
+
 </div>
 
-<?php include "../../templates/page_wali/footer.php" ?>
+<?php include "../../templates/footer.php" ?>

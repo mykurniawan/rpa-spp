@@ -1,9 +1,20 @@
-<?php include "../../templates/sidebar/sidebar_wali.php" ?>
-<?php include"../rpa-spp/connect.php" ?>
+<?php include "../../templates/sidebar/sidebar_wali.php"; ?>
+<?php include "../../connect.php"; 
+$query = mysqli_query($connect, "SELECT t_wali.*, 
+            t_siswa.nama AS nama_siswa , t_siswa.nis AS nis_siswa, t_siswa.kelas AS kelas_siswa
+
+FROM t_wali LEFT JOIN t_siswa ON t_wali.id_siswa = t_siswa.id_siswa");
+$data = mysqli_fetch_array($query);
+
+if (!$query) {
+    die("Query gagal dijalankan: " . mysqli_error($connect));
+}
+?>
+
 
 
 <div class="page-heading">
-    <h3>Selamat datang di sistem pembayaran spp (nama sekolah)</h3>
+    <h3>Selamat datang di sistem pembayaran spp MI Al-Huda</h3>
 </div>
 <div class="page-content">
     <section class="row">
@@ -36,7 +47,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
-                                    <h6 class="text-muted font-semibold">Nama (Siswa)</h6>
+                                    <h6 class="text-muted font-semibold">Nama (Siswa) <?= $data['nama_siswa'] ?></h6>
                                     <h6 class="font-extrabold mb-0">NISN/id</h6>
                                 </div>
                             </div>
@@ -70,15 +81,16 @@
                                     </div>
                                 </div>
                                 <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
-                                    <h6 class="text-muted font-semibold">Saved Post</h6>
-                                    <h6 class="font-extrabold mb-0">112</h6>
+                                    <h6 class="text-muted font-semibold">Riwayat Pembayaran</h6>
+                                    <h6 class="font-extrabold mb-0"></h6>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="row">
+
+            <!-- <div class="row">
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
@@ -89,72 +101,23 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <!-- <div class="row">
-                <div class="col-12 col-xl-4">
+            </div> -->
+            <div class="row">
+                <!-- <div class="col-12 col-xl-4">
                     <div class="card">
                         <div class="card-header">
-                            <h4>Profile Visit</h4>
+                            <h4>Profile Siswa</h4>
                         </div>
                         <div class="card-body">
-                            <div class="row">
-                                <div class="col-7">
-                                    <div class="d-flex align-items-center">
-                                        <svg class="bi text-primary" width="32" height="32" fill="blue"
-                                            style="width:10px">
-                                            <use
-                                                xlink:href="../assets/static/images/bootstrap-icons.svg#circle-fill" />
-                                        </svg>
-                                        <h5 class="mb-0 ms-3">Europe</h5>
-                                    </div>
-                                </div>
-                                <div class="col-5">
-                                    <h5 class="mb-0 text-end">862</h5>
-                                </div>
-                                <div class="col-12">
-                                    <div id="chart-europe"></div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-7">
-                                    <div class="d-flex align-items-center">
-                                        <svg class="bi text-success" width="32" height="32" fill="blue"
-                                            style="width:10px">
-                                            <use
-                                                xlink:href="../assets/static/images/bootstrap-icons.svg#circle-fill" />
-                                        </svg>
-                                        <h5 class="mb-0 ms-3">America</h5>
-                                    </div>
-                                </div>
-                                <div class="col-5">
-                                    <h5 class="mb-0 text-end">375</h5>
-                                </div>
-                                <div class="col-12">
-                                    <div id="chart-america"></div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-7">
-                                    <div class="d-flex align-items-center">
-                                        <svg class="bi text-danger" width="32" height="32" fill="blue"
-                                            style="width:10px">
-                                            <use
-                                                xlink:href="../assets/static/images/bootstrap-icons.svg#circle-fill" />
-                                        </svg>
-                                        <h5 class="mb-0 ms-3">Indonesia</h5>
-                                    </div>
-                                </div>
-                                <div class="col-5">
-                                    <h5 class="mb-0 text-end">1025</h5>
-                                </div>
-                                <div class="col-12">
-                                    <div id="chart-indonesia"></div>
-                                </div>
-                            </div>
+                            <h4>NIS : <?= $data['nis_siswa'] ?></h4>
+                            <h4>Nama Siswa : <?= $data['nama_siswa'] ?></h4>
+                            <h4>Kelas : <?= $data['kelas_siswa'] ?></h4>
                         </div>
                     </div>
-                </div>
-                <div class="col-12 col-xl-8">
+                </div> -->
+                
+                
+                <div class="col-12 col-xl-6">
                     <div class="card">
                         <div class="card-header">
                             <h4>Latest Comments</h4>
@@ -164,36 +127,41 @@
                                 <table class="table table-hover table-lg">
                                     <thead>
                                         <tr>
-                                            <th>Name</th>
-                                            <th>Comment</th>
+                                            <th>Profil</th>
+                                            <th>Siswa</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
                                             <td class="col-3">
                                                 <div class="d-flex align-items-center">
-                                                    <div class="avatar avatar-md">
-                                                        <img src="../assets/compiled/jpg/5.jpg">
-                                                    </div>
-                                                    <p class="font-bold ms-3 mb-0">Si Cantik</p>
+                                                 
+                                                    <p class="font-bold ms-3 mb-0">NIS</p>
                                                 </div>
                                             </td>
                                             <td class="col-auto">
-                                                <p class=" mb-0">Congratulations on your graduation!</p>
+                                                <p class=" mb-0"><?= $data['nis_siswa'] ?></p>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td class="col-3">
                                                 <div class="d-flex align-items-center">
-                                                    <div class="avatar avatar-md">
-                                                        <img src="../assets/compiled/jpg/2.jpg">
-                                                    </div>
-                                                    <p class="font-bold ms-3 mb-0">Si Ganteng</p>
+                                                 
+                                                    <p class="font-bold ms-3 mb-0">Nama Siswa</p>
                                                 </div>
                                             </td>
                                             <td class="col-auto">
-                                                <p class=" mb-0">Wow amazing design! Can you make another tutorial for
-                                                    this design?</p>
+                                                <p class=" mb-0"><?= $data['nama_siswa'] ?></p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="col-3">
+                                                <div class="d-flex align-items-center">
+                                                    <p class="font-bold ms-3 mb-0">Kelas</p>
+                                                </div>
+                                            </td>
+                                            <td class="col-auto">
+                                                <p class=" mb-0"><?= $data['kelas_siswa'] ?></p>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -202,7 +170,7 @@
                         </div>
                     </div>
                 </div>
-            </div> -->
+            </div>
         </div>
     </section>
 </div>
