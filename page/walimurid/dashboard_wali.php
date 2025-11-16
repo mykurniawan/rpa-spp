@@ -1,3 +1,12 @@
+<!-- <?php 
+session_start();
+if(!isset($_SESSION['login_status'])){
+    header("Location: ../../index.php?pesan=belum_login");
+    exit();
+}
+?> -->
+
+
 <?php include "../../templates/sidebar/sidebar_wali.php"; ?>
 <?php include "../../connect.php"; 
 $query = mysqli_query($connect, "SELECT t_wali.*, 
