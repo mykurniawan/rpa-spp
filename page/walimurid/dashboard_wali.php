@@ -2,7 +2,6 @@
 <?php include "../../connect.php"; 
 $query = mysqli_query($connect, "SELECT t_wali.*, 
             t_siswa.nama AS nama_siswa , t_siswa.nis AS nis_siswa, t_siswa.kelas AS kelas_siswa
-
 FROM t_wali LEFT JOIN t_siswa ON t_wali.id_siswa = t_siswa.id_siswa");
 $data = mysqli_fetch_array($query);
 

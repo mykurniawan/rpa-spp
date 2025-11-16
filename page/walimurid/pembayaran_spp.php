@@ -1,5 +1,19 @@
 <?php include "../../templates/sidebar/sidebar_wali.php"; ?>
-<?php include "../../connect.php"; ?>
+<?php include "../../connect.php";
+// UJI COBA 
+// $query = mysqli_query($connect, "SELECT t_wali.*, 
+//             t_siswa.id_siswa AS id_siswa
+//             FROM t_wali LEFT JOIN t_siswa ON t_wali.id_siswa = t_siswa.id_siswa");
+
+$query = mysqli_query($connect, "SELECT t_wali.id_wali as id_wali, 
+           t_wali.id_siswa as id_siswa FROM t_wali LEFT JOIN t_siswa 
+           ON t_wali.id_siswa = t_siswa.id_siswa");
+$data = mysqli_fetch_array($query);
+if (!$query) {
+    die("Query gagal dijalankan: " . mysqli_error($connect));
+}
+
+?>
 
 <div class="page-heading">
     <div class="page-title">
@@ -106,9 +120,23 @@
                     </div>
                     <div class="card-content">
                         <div class="card-body">
-                            <form class="form form-horizontal" method="post" action="proses_pembayaran_spp.php" enctype="multipart/form-data">
+                            <form class="form form-horizontal" method="post" action="../../proses/proses_pembayaran_spp.php" enctype="multipart/form-data">
                                 <div class="form-body">
                                     <div class="row">
+                                        <div class="col-md-4">
+                                            <!-- <label for="first-name-horizontal">id wali</label> -->
+                                        </div>
+                                        <div class="col-md-8 form-group">
+                                            <input type="text" id="id_wali" class="form-control" name="id_wali"
+                                                placeholder="id wali" hidden value="<?= $data['id_wali'] ?>"> <!--ambil dari session login nanti -->
+                                        </div>
+                                        <div class="col-md-4">
+                                            <!-- <label for="first-name-horizontal">Tanggal Bayar</label> -->
+                                        </div>
+                                        <div class="col-md-8 form-group">
+                                            <input type="text" id="id_siswa" class="form-control" name="id_siswa"
+                                                placeholder="Tanggal Bayar" hidden value="<?= $data['id_siswa'] ?>"> <!--ambil dari session login nanti -->
+                                        </div>
                                         <div class="col-md-4">
                                             <label for="first-name-horizontal">Tanggal Bayar</label>
                                         </div>
