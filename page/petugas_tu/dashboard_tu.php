@@ -85,11 +85,11 @@ if (isset($_GET['msg'])) {
                                                 <th>No</th>
                                                 <th>ID Wali</th>
                                                 <th>Username</th>
-                                                <th>Password</th>
+                                                <!-- <th>Password</th> -->
                                                 <th>Nama Lengkap</th>
                                                 <th>Jenis Kelamin</th>
                                                 <th>Tempat Lahir</th>
-                                                <th>Tanggal Lahir</th>
+                                                <!-- <th>Tanggal Lahir</th> -->
                                                 <th>Alamat</th>
                                                 <th>No Tlp</th>
                                                 <th>email</th>
@@ -108,11 +108,11 @@ if (isset($_GET['msg'])) {
                                                     echo "<td>" . $no++ . "</td>"; // nomor urut
                                                     echo "<td>" . htmlspecialchars($data['id_wali']) . "</td>";
                                                     echo "<td>" . htmlspecialchars($data['username']) . "</td>";
-                                                    echo "<td>" . htmlspecialchars($data['password']) . "</td>";
+                                                    // echo "<td>" . htmlspecialchars($data['password']) . "</td>";
                                                     echo "<td>" . htmlspecialchars($data['nama']) . "</td>";
                                                     echo "<td>" . htmlspecialchars($data['jenis_kelamin']) . "</td>";
                                                     echo "<td>" . htmlspecialchars($data['tempat_lahir']) . "</td>";
-                                                    echo "<td>" . htmlspecialchars($data['tgl_lahir']) . "</td>";
+                                                    // echo "<td>" . htmlspecialchars($data['tgl_lahir']) . "</td>";
                                                     echo "<td>" . htmlspecialchars($data['alamat']) . "</td>";
                                                     echo "<td>" . htmlspecialchars($data['no_telpon']) . "</td>";
                                                     echo "<td>" . htmlspecialchars($data['email']) . "</td>";

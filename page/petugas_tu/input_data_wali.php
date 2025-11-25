@@ -9,7 +9,7 @@
             <div class="col-12 col-md-6 order-md-2 order-first">
                 <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+                        <li class="breadcrumb-item"><a href="dashboard_tu.php">Dashboard</a></li>
                         <li class="breadcrumb-item active" aria-current="page">Input Data Wali Siswa</li>
                     </ol>
                 </nav>
@@ -104,15 +104,23 @@
                                                 <option value="">--Pilih Siswa--</option>
                                                 <?php
                                                 include_once "../../connect.php";
-                                                $siswa_query = mysqli_query($connect, "SELECT id_siswa, nama FROM t_siswa ORDER BY nama ASC");
+                                                $siswa_query = mysqli_query(
+                                                    $connect,
+                                                    "SELECT t_siswa.id_siswa, t_siswa.nama FROM t_siswa 
+                                                    LEFT JOIN t_wali ON t_siswa.id_siswa = t_wali.id_siswa
+                                                    WHERE t_wali.id_siswa IS NULL
+                                                    ORDER BY t_siswa.nama ASC"
+                                                );
                                                 while ($siswa = mysqli_fetch_assoc($siswa_query)) {
-                                                    echo '<option value="' . htmlspecialchars($siswa['id_siswa']) . '">' . htmlspecialchars($siswa['nama']) . '</option>';
+                                                    echo '<option value="' . htmlspecialchars($siswa['id_siswa']) . '">'
+                                                        . htmlspecialchars($siswa['nama']) .
+                                                        '</option>';
                                                 }
                                                 ?>
                                             </select>
                                         </div>
                                     </div>
-                               
+
                                     <div class="col-12 d-flex justify-content-end">
                                         <button type="submit" class="btn btn-primary me-1 mb-1">Simpan</button>
                                         <button type="reset" class="btn btn-light-secondary me-1 mb-1">Reset</button>
