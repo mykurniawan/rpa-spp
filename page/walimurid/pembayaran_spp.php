@@ -1,20 +1,30 @@
-<?php include "../../templates/sidebar/sidebar_wali.php"; ?>
-<?php include "../../connect.php";
-// UJI COBA 
-// $query = mysqli_query($connect, "SELECT t_wali.*, 
-//             t_siswa.id_siswa AS id_siswa
-//             FROM t_wali LEFT JOIN t_siswa ON t_wali.id_siswa = t_siswa.id_siswa");
-
-$query = mysqli_query($connect, "SELECT t_wali.id_wali as id_wali, 
-           t_wali.id_siswa as id_siswa FROM t_wali LEFT JOIN t_siswa 
-           ON t_wali.id_siswa = t_siswa.id_siswa");
-$data = mysqli_fetch_array($query);
-if (!$query) {
-    die("Query gagal dijalankan: " . mysqli_error($connect));
+<?php
+session_start();
+if (!isset($_SESSION['login_status'])) {
+    header("Location: ../../index.php?pesan=belum_login");
+    exit();
 }
 
-?>
+include "../../connect.php";
 
+$id_wali = $_SESSION['id_wali'];
+
+$query = mysqli_query($connect, 
+    "SELECT t_siswa.id_siswa, t_siswa.kelas
+     FROM t_wali
+     LEFT JOIN t_siswa 
+         ON t_wali.id_siswa = t_siswa.id_siswa
+     WHERE t_wali.id_wali='$id_wali'"
+);
+
+$data = mysqli_fetch_array($query);
+
+// if (!$query) {
+//     die("Query gagal dijalankan: " . mysqli_error($connect));
+// }
+
+?>
+<?php include "../../templates/sidebar/sidebar_wali.php"; ?>
 <div class="page-heading">
     <div class="page-title">
         <div class="row">
@@ -128,21 +138,51 @@ if (!$query) {
                                         </div>
                                         <div class="col-md-8 form-group">
                                             <input type="text" id="id_wali" class="form-control" name="id_wali"
-                                                placeholder="id wali" hidden value="<?= $data['id_wali'] ?>"> <!--ambil dari session login nanti -->
+                                                placeholder="id wali" hidden value="<?= $_SESSION['id_wali'] ?>"> <!--ambil dari session login nanti -->
                                         </div>
                                         <div class="col-md-4">
                                             <!-- <label for="first-name-horizontal">Tanggal Bayar</label> -->
                                         </div>
                                         <div class="col-md-8 form-group">
                                             <input type="text" id="id_siswa" class="form-control" name="id_siswa"
-                                                placeholder="Tanggal Bayar" hidden value="<?= $data['id_siswa'] ?>"> <!--ambil dari session login nanti -->
+                                                placeholder="" hidden value="<?= $data['id_siswa'] ?>"> <!--ambil dari session login nanti -->
                                         </div>
-                                        <div class="col-md-4">
+                                        <!-- <div class="col-md-4">
                                             <label for="first-name-horizontal">Tanggal Bayar</label>
                                         </div>
                                         <div class="col-md-8 form-group">
                                             <input type="date" id="tgl_bayar" class="form-control" name="tgl_bayar"
                                                 placeholder="Tanggal Bayar">
+                                        </div> -->
+
+                                        <div class="col-md-4">
+                                            <label for="first-name-horizontal">Kelas</label>
+                                        </div>
+                                        <div class="col-md-8 form-group">
+                                            <fieldset class="form-group">
+                                                <select class="form-select" id="kelas" name="kelas" required>
+                                                    <option value="<?= $data['kelas'] ?>"><?= $data['kelas'] ?></option>
+                                                    <option value="1">1</option>
+                                                    <option value="2">2</option>
+                                                    <option value="3">3</option>
+                                                    <option value="4">4</option>
+                                                    <option value="5">5</option>
+                                                    <option value="6">6</option>
+                                                </select>
+                                            </fieldset>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <label for="first-name-horizontal">Semester</label>
+                                        </div>
+                                        <div class="col-md-8 form-group">
+                                            <fieldset class="form-group">
+                                                <select class="form-select" id="semester" name="semester" required>
+                                                    <option value="">--Pilih--</option>
+                                                    <option value="Ganjil">Ganjil</option>
+                                                    <option value="Genap">Genap</option>
+                                                </select>
+                                            </fieldset>
                                         </div>
                                         <div class="col-md-4">
                                             <label for="kwitansi">Kwitansi</label>
@@ -155,7 +195,7 @@ if (!$query) {
                                             <label for="first-name-horizontal">Masukkan Jumlah Nominal</label>
                                         </div>
                                         <div class="col-md-8 form-group">
-                                            <input type="number" id="jumlah_nominal" class="form-control" name="jumlah_nominal"
+                                            <input type="number" id="jumlah_nominal" class="form-control" name="jumlah_bayar"
                                                 placeholder="Contoh : 300000">
                                         </div>
                                         <div class="col-md-4">

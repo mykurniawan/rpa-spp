@@ -3,7 +3,8 @@ include "../connect.php";
 
 $id_wali      = mysqli_real_escape_string($connect, $_POST['id_wali']);
 $id_siswa     = mysqli_real_escape_string($connect, $_POST['id_siswa']);
-$tgl_bayar    = mysqli_real_escape_string($connect, $_POST['tgl_bayar']);
+$kelas        = mysqli_real_escape_string($connect, $_POST['kelas']);
+$semester     = mysqli_real_escape_string($connect, $_POST['semester']);
 $jumlah_bayar = mysqli_real_escape_string($connect, $_POST['jumlah_bayar']);
 $catatan      = mysqli_real_escape_string($connect, $_POST['catatan']);
 
@@ -47,9 +48,9 @@ if (!empty($_FILES['kwitansi']['name'])) {
 
 // ========== SIMPAN KE DATABASE ==========
 $query = "INSERT INTO t_pembayaran_spp (
-              id_wali, id_siswa, tgl_bayar, jumlah_bayar, kwitansi, catatan
+              id_wali, id_siswa, kelas, semester, jumlah_bayar, kwitansi, catatan, status_validasi
           ) VALUES (
-              '$id_wali', '$id_siswa', '$tgl_bayar', '$jumlah_bayar', '$new_file_name', '$catatan'
+              '$id_wali', '$id_siswa', '$kelas', '$semester', '$jumlah_bayar', '$new_file_name', '$catatan', 'Pending'
           )";
 
 if (mysqli_query($connect, $query)) {
