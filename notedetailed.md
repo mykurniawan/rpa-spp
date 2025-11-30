@@ -9,9 +9,10 @@
 
 4. halaman wali
     41. t_pembayaran_spp fix this tabel:
-        semester[?]
-        status_validasi ENUM('Pending','Valid','Rejected') DEFAULT 'Pending'[?]
+        semester[done]
+        status_validasi ENUM('Pending','Valid','Rejected') DEFAULT 'Pending'[done]
         tgl_validasi timestamp[?]
+        lihat detile pembayaran[?]
 
 login-logout-session [proses40%]
 pengecekan salah login alert [OK]

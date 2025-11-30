@@ -9,19 +9,16 @@ include "../../connect.php";
 
 $id_wali = $_SESSION['id_wali'];
 
-$query = mysqli_query($connect, 
+$query = mysqli_query(
+    $connect,
     "SELECT t_siswa.id_siswa, t_siswa.kelas
      FROM t_wali
      LEFT JOIN t_siswa 
          ON t_wali.id_siswa = t_siswa.id_siswa
-     WHERE t_wali.id_wali='$id_wali'"
+     WHERE t_wali.id_wali='$id_wali' limit 1"
 );
 
 $data = mysqli_fetch_array($query);
-
-// if (!$query) {
-//     die("Query gagal dijalankan: " . mysqli_error($connect));
-// }
 
 ?>
 <?php include "../../templates/sidebar/sidebar_wali.php"; ?>
@@ -147,27 +144,19 @@ $data = mysqli_fetch_array($query);
                                             <input type="text" id="id_siswa" class="form-control" name="id_siswa"
                                                 placeholder="" hidden value="<?= $data['id_siswa'] ?>"> <!--ambil dari session login nanti -->
                                         </div>
-                                        <!-- <div class="col-md-4">
-                                            <label for="first-name-horizontal">Tanggal Bayar</label>
-                                        </div>
-                                        <div class="col-md-8 form-group">
-                                            <input type="date" id="tgl_bayar" class="form-control" name="tgl_bayar"
-                                                placeholder="Tanggal Bayar">
-                                        </div> -->
-
                                         <div class="col-md-4">
                                             <label for="first-name-horizontal">Kelas</label>
                                         </div>
                                         <div class="col-md-8 form-group">
                                             <fieldset class="form-group">
                                                 <select class="form-select" id="kelas" name="kelas" required>
-                                                    <option value="<?= $data['kelas'] ?>"><?= $data['kelas'] ?></option>
-                                                    <option value="1">1</option>
-                                                    <option value="2">2</option>
-                                                    <option value="3">3</option>
-                                                    <option value="4">4</option>
-                                                    <option value="5">5</option>
-                                                    <option value="6">6</option>
+                                                    <option value="">-- Pilih Kelas --</option>
+                                                    <option value="1" <?= ($data['kelas'] == 1) ? 'selected' : '' ?>>1</option>
+                                                    <option value="2" <?= ($data['kelas'] == 2) ? 'selected' : '' ?>>2</option>
+                                                    <option value="3" <?= ($data['kelas'] == 3) ? 'selected' : '' ?>>3</option>
+                                                    <option value="4" <?= ($data['kelas'] == 4) ? 'selected' : '' ?>>4</option>
+                                                    <option value="5" <?= ($data['kelas'] == 5) ? 'selected' : '' ?>>5</option>
+                                                    <option value="6" <?= ($data['kelas'] == 6) ? 'selected' : '' ?>>6</option>
                                                 </select>
                                             </fieldset>
                                         </div>
@@ -217,7 +206,7 @@ $data = mysqli_fetch_array($query);
                     </div>
                 </div>
             </div>
-            
+
         </div>
     </section>
     <!-- // Basic Horizontal form layout section end -->

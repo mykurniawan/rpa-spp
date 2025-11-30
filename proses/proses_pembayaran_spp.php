@@ -54,7 +54,8 @@ $query = "INSERT INTO t_pembayaran_spp (
           )";
 
 if (mysqli_query($connect, $query)) {
-    header("Location: ../page/walimurid/pembayaran_spp.php?msg=payment_success");
+    // header("Location: ../page/walimurid/pembayaran_spp.php?msg=payment_success");
+    header("Location: /rpa-spp/page/walimurid/riwayat_pembayaran.php?msg=input_success");
     exit();
 } else {
     header("Location: ../page/walimurid/pembayaran_spp.php?msg=payment_failed");
