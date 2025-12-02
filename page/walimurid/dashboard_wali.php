@@ -1,13 +1,11 @@
 <?php
 session_start();
-if (!isset($_SESSION['login_status'])) {
-    header("Location: ../../index.php?pesan=belum_login");
+if (!isset($_SESSION['login_status']) || $_SESSION['role'] !== "wali") {
+    header("Location: ../../index.php?msg=not_allowed");
     exit();
 }
 ?>
 <?php include "../../connect.php";
-
-
 
 
 $id_wali = $_SESSION['id_wali'];

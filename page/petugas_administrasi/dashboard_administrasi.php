@@ -1,4 +1,10 @@
-<?php include "../../templates/sidebar/sidebar_administrasi.php" ?>
+<?php
+session_start();
+if (!isset($_SESSION['login_status']) || $_SESSION['role'] !== "Petugas Administrasi") {
+    header("Location: ../../index.php?msg=not_allowed");
+    exit();
+}
+?>
 <?php include "../../connect.php";
 $query = mysqli_query($connect, "SELECT * FROM t_siswa");
 
@@ -18,7 +24,18 @@ if (isset($_GET['msg'])) {
     }
 }
 ?>
+
+<?php include "../../templates/sidebar/sidebar_administrasi.php" ?>
 <div class="page-heading">
+    <?php
+    if (isset($_GET['msg'])) {
+
+        $msg = $_GET['msg'];
+        if ($msg === 'login_success') {
+            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">Login Berhasil (Selamat Datang).<button type="button" class="btn-close" aria-label="Close" onclick="this.parentElement.remove()"></button></div>';
+        }
+    }
+    ?>
     <h3>Selamat datang di sistem pembayaran spp MI Al-Huda</h3>
 </div>
 <div class="page-content">

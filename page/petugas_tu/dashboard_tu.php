@@ -1,4 +1,10 @@
-<?php include "../../templates/sidebar/sidebar_tu.php" ?>
+<?php
+session_start();
+if (!isset($_SESSION['login_status']) || $_SESSION['role'] !== "Petugas TU") {
+    header("Location: ../../index.php?msg=not_allowed");
+    exit();
+}
+?>
 <?php include "../../connect.php";
 $query = mysqli_query($connect, "SELECT t_wali.*, t_siswa.nama AS nama_siswa FROM t_wali LEFT JOIN t_siswa ON t_wali.id_siswa = t_siswa.id_siswa");
 
@@ -7,25 +13,37 @@ if (!$query) {
 }
 ?>
 
-<?php
-// Notifikasi pesan sukses / gagal input data siswa (dismissible + auto-fade)
-if (isset($_GET['msg'])) {
-    $msg = $_GET['msg'];
-    if ($msg === 'input_sukses') {
-        echo '<div class="alert alert-success alert-dismissible fade show" role="alert">Data wali berhasil ditambahkan.<button type="button" class="btn-close" aria-label="Close" onclick="this.parentElement.remove()"></button></div>';
-    } elseif ($msg === 'input_gagal') {
-        echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">Gagal menambahkan data wali.<button type="button" class="btn-close" aria-label="Close" onclick="this.parentElement.remove()"></button></div>';
-    }
-}
-?>
+
+<?php include "../../templates/sidebar/sidebar_tu.php" ?>
 <div class="page-heading">
+    <?php
+    if (isset($_GET['msg'])) {
+
+        $msg = $_GET['msg'];
+        if ($msg === 'login_success') {
+            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">Login Berhasil (Selamat Datang).<button type="button" class="btn-close" aria-label="Close" onclick="this.parentElement.remove()"></button></div>';
+        }
+    }
+    ?>
+
+    <?php
+    // Notifikasi pesan sukses / gagal input data
+    if (isset($_GET['msg'])) {
+        $msg = $_GET['msg'];
+        if ($msg === 'input_sukses') {
+            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">Data wali berhasil ditambahkan.<button type="button" class="btn-close" aria-label="Close" onclick="this.parentElement.remove()"></button></div>';
+        } elseif ($msg === 'input_gagal') {
+            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">Gagal menambahkan data wali.<button type="button" class="btn-close" aria-label="Close" onclick="this.parentElement.remove()"></button></div>';
+        }
+    }
+    ?>
     <h3>Selamat datang di sistem pembayaran spp MI Al-Huda</h3>
 </div>
 <div class="page-content">
     <section class="row">
         <div class="col-12 col-lg-12">
             <div class="row">
-          
+
                 <div class="col-6 col-lg-3 col-md-6">
                     <div class="card">
                         <a href="../../page/petugas_tu/input_data_wali.php">

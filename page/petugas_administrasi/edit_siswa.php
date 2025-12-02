@@ -1,4 +1,10 @@
-<?php include "../../templates/sidebar/sidebar_administrasi.php" ?>
+<?php
+session_start();
+if (!isset($_SESSION['login_status']) || $_SESSION['role'] !== "Petugas Administrasi") {
+    header("Location: ../../index.php?msg=not_allowed");
+    exit();
+}
+?>
 <?php
 include "../../connect.php";
 $query = mysqli_query($connect, "SELECT * FROM t_siswa");
@@ -8,6 +14,8 @@ if (!$query) {
         " - " . mysqli_error($connect));
 }
 ?>
+
+<?php include "../../templates/sidebar/sidebar_administrasi.php" ?>
 <div class="page-heading">
     <div class="page-title">
         <div class="row">
@@ -62,13 +70,13 @@ if (!$query) {
                                         <th>ID Siswa</th>
                                         <th>NIS</th>
                                         <th>Nama Lengkap</th>
-                                   
+
                                         <!-- <th>Tempat Lahir</th> -->
                                         <!-- <th>Tanggal Lahir</th> -->
                                         <!-- <th>Alamat</th> -->
                                         <th>Kelas</th>
                                         <!-- <th>Nama Wali</th> -->
-                             
+
                                         <th>Options</th>
                                     </tr>
                                 </thead>
@@ -108,7 +116,9 @@ if (!$query) {
                                             setTimeout(function() {
                                                 alert.style.transition = 'opacity 0.5s ease';
                                                 alert.style.opacity = '0';
-                                                setTimeout(function() { if (alert.parentNode) alert.parentNode.removeChild(alert); }, 500);
+                                                setTimeout(function() {
+                                                    if (alert.parentNode) alert.parentNode.removeChild(alert);
+                                                }, 500);
                                             }, 4000);
                                         });
 

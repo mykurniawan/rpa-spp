@@ -100,7 +100,7 @@
                             <ul class="submenu ">
 
                                 <li class="submenu-item  ">
-                                    <a href="../../index.php" class="submenu-link">Log-out</a>
+                                    <a href="../../proses/proses_logout.php" class="submenu-link">Log-out</a>
                                 </li>
                             </ul>
                         </li>

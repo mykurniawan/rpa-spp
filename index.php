@@ -1,11 +1,3 @@
-<?php
-
-if (isset($_GET['msg']) && $_GET['msg'] == 'logout_success') { ?>
-    <div class="alert alert-success">Anda berhasil logout.</div>
-
-
-<?php } ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -75,6 +67,16 @@ if (isset($_GET['msg']) && $_GET['msg'] == 'logout_success') { ?>
                         }
                     }
                     ?>
+
+                    <?php
+                    if (isset($_GET['msg']) && $_GET['msg'] == 'logout_success') { ?>
+                        <div class="alert alert-success">Anda berhasil logout.</div>
+                    <?php } ?>
+
+                    <?php
+                    if (isset($_GET['msg']) && $_GET['msg'] == 'not_allowed') { ?>
+                        <div class="alert alert-danger">Anda tidak memiliki akses ke halaman tersebut.</div>
+                    <?php } ?>
                 </div>
             </div>
         </div>

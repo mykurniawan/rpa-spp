@@ -1,3 +1,10 @@
+<?php
+session_start();
+if (!isset($_SESSION['login_status']) || $_SESSION['role'] !== "Petugas TU") {
+    header("Location: ../../index.php?msg=not_allowed");
+    exit();
+}
+?>
 <?php include "../../templates/sidebar/sidebar_tu.php" ?>
 <div class="page-heading">
     <div class="page-title">

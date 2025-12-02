@@ -1,4 +1,11 @@
 <?php
+session_start();
+if (!isset($_SESSION['login_status']) || $_SESSION['role'] !== "Petugas TU") {
+    header("Location: ../../index.php?msg=not_allowed");
+    exit();
+}
+?>
+<?php
 include "../../connect.php";
 
 // Ambil id siswa dari parameter GET

@@ -1,3 +1,10 @@
+<?php
+session_start();
+if (!isset($_SESSION['login_status']) || $_SESSION['role'] !== "Petugas TU") {
+    header("Location: ../../index.php?msg=not_allowed");
+    exit();
+}
+?>
 <?php include "../../templates/sidebar/sidebar_tu.php" ?>
 <?php
 include "../../connect.php";
@@ -63,7 +70,7 @@ if (!$query) {
                                         <th>No</th>
                                         <th>ID Wali</th>
                                         <th>Username</th>
-                                        <th>Password</th>
+                                        <!-- <th>Password</th> -->
                                         <th>Nama Lengkap</th>
                                         <th>Jenis Kelamin</th>
                                         <th>Tempat Lahir</th>
@@ -87,7 +94,7 @@ if (!$query) {
                                             echo "<td>" . $no++ . "</td>"; // nomor urut
                                             echo "<td>" . htmlspecialchars($data['id_wali']) . "</td>";
                                             echo "<td>" . htmlspecialchars($data['username']) . "</td>";
-                                            echo "<td>" . htmlspecialchars($data['password']) . "</td>";
+                                            // echo "<td>" . htmlspecialchars($data['password']) . "</td>";
                                             echo "<td>" . htmlspecialchars($data['nama']) . "</td>";
                                             echo "<td>" . htmlspecialchars($data['jenis_kelamin']) . "</td>";
                                             echo "<td>" . htmlspecialchars($data['tempat_lahir']) . "</td>";
