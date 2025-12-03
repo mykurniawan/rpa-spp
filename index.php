@@ -63,7 +63,7 @@
                     if (isset($_GET['msg'])) {
                         $msg = $_GET['msg'];
                         if ($msg === 'login_failed') {
-                            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">Ups Username / Password salah nih.<button type="button" class="btn-close" aria-label="Close" onclick="this.parentElement.remove()"></button></div>';
+                            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">Ups Cek lagi Username / Password Anda.<button type="button" class="btn-close" aria-label="Close" onclick="this.parentElement.remove()"></button></div>';
                         }
                     }
                     ?>

@@ -1,4 +1,4 @@
-[PROJECT-SPP-RPA] [30%]
+[PROJECT-SPP-RPA] [40%] ==> [2x] [75%payed]
 1. halaman wali [-detail]
     11. detail dashboard [onprogress]
 
@@ -12,55 +12,20 @@
         semester[done]
         status_validasi ENUM('Pending','Valid','Rejected') DEFAULT 'Pending'[done]
         tgl_validasi timestamp[?]
-        lihat detile pembayaran[?]
+        lihat detile pembayaran[done]
 
-login-logout-session [proses40%]
+5. kepala tata usaha
+    51. halaman dashboard dll
+    52. validasi pembayaran 
+        report ke keuangan [?]
+
+6. staff keuangan yayasan 
+    61. halaman dashboard dll
+    62. review report & laporan keuangan spp [?]
+
+login-logout-session [proses100%]
 pengecekan salah login alert [OK]
 pengecekan login alert [ok]
 
 
 
-LOGIN V1 [WALI]
-<?php 
-session_start();
-include "../connect.php";
-
-// ambil data dari form login
-$username = mysqli_real_escape_string($connect, $_POST['username']);
-$password_plain = mysqli_real_escape_string($connect, $_POST['password']);
-
-// cek username di database (password tidak dibandingkan di query)
-$query = "SELECT * FROM t_wali WHERE username='$username' LIMIT 1";
-$result = mysqli_query($connect, $query);
-
-if (mysqli_num_rows($result) === 1) {
-
-    $data = mysqli_fetch_assoc($result);
-
-    // verifikasi password hash
-    if (password_verify($password_plain, $data['password'])) {
-
-        // simpan session 
-        $_SESSION['id_wali'] = $data['id_wali'];
-        $_SESSION['username'] = $data['username'];
-        $_SESSION['login_status'] = true;
-
-        // redirect ke dashboard wali
-        header("Location: ../page/walimurid/dashboard_wali.php?msg=login_success");
-        exit();
-
-    } else {
-        // password salah
-        header("Location: ../index.php?msg=login_failed");
-        exit();
-    }
-
-} else {
-    // username tidak ditemukan
-    header("Location: ../index.php?msg=login_failed");
-    exit();
-}
-
-
-?>
-LOGIN V1 [WALI]
