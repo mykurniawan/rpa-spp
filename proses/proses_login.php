@@ -52,7 +52,10 @@ if (mysqli_num_rows($result_tu) === 1) {
             header("Location: ../page/petugas_tu/dashboard_tu.php?msg=login_success");
         } elseif ($data['role'] === 'Petugas Administrasi') {
             header("Location: ../page/petugas_administrasi/dashboard_administrasi.php?msg=login_success");
-        } else {
+        } else if($data['role'] === 'Kepala TU') {
+            header("Location: ../page/kepala_tu/dashboard_kepala_tu.php?msg=login_success");
+        } 
+        else {
             header("Location: ../page/tu/dashboard_administrasi.php");
         }
         exit();
