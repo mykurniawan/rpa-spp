@@ -38,7 +38,7 @@ if (!$query) {
 
         $msg = $_GET['msg'];
         if ($msg === 'input_success') {
-            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">Input pembayaran berhasil.<button type="button" class="btn-close" aria-label="Close" onclick="this.parentElement.remove()"></button></div>';
+            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">ACC pembayaran berhasil.<button type="button" class="btn-close" aria-label="Close" onclick="this.parentElement.remove()"></button></div>';
         }
     }
     ?>
@@ -114,7 +114,7 @@ if (!$query) {
                 </table>
 
                 <!-- modal  -->
-            
+
 
                 <!-- Modal Detail Pembayaran -->
                 <div class="modal fade" id="detailPembayaranModal" tabindex="-1" aria-labelledby="detailPembayaranModalTitle" aria-hidden="true">
@@ -126,16 +126,34 @@ if (!$query) {
                             </div>
                             <div class="modal-body">
                                 <table class="table table-borderless mb-0">
-                                    <tr><th>ID Pembayaran</th><td id="modal-id-pembayaran"></td></tr>
-                                    <tr><th>Tanggal Bayar</th><td id="modal-tanggal-bayar"></td></tr>
-                                    <tr><th>Kelas</th><td id="modal-kelas"></td></tr>
-                                    <tr><th>Semester</th><td id="modal-semester"></td></tr>
-                                    <tr><th>Nama Siswa</th><td id="modal-nama-siswa"></td></tr>
-                                    <tr><th>Status</th><td id="modal-status"></td></tr>
+                                    <tr>
+                                        <th>ID Pembayaran</th>
+                                        <td id="modal-id-pembayaran"></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Tanggal Bayar</th>
+                                        <td id="modal-tanggal-bayar"></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Kelas</th>
+                                        <td id="modal-kelas"></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Semester</th>
+                                        <td id="modal-semester"></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Nama Siswa</th>
+                                        <td id="modal-nama-siswa"></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Status</th>
+                                        <td id="modal-status"></td>
+                                    </tr>
                                 </table>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">ACC</button>
+                                <button type="button" id="btnAcc" class="btn btn-primary" data-bs-dismiss="modal">ACC</button>
                                 <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button> -->
                             </div>
                         </div>
@@ -174,10 +192,51 @@ if (!$query) {
         }
     });
 </script>
-<!-- script modal  -->
-<!-- script modal  -->
+
+
+<!-- modal acc  -->
 <script>
-    // Script untuk mengisi modal detail pembayaran
+    $(document).ready(function() {
+        let idPembayaran = null;
+
+        // saat tombol detail ditekan -> isi modal 
+        $(".btn-detail-pembayaran").click(function() {
+            idPembayaran = $(this).data("id");
+            $("#modal-id-pembayaran").text(idPembayaran);
+            $("#modal-tanggal-bayar").text($(this).data("tanggal"));
+            $("#modal-kelas").text($(this).data("kelas"));
+            $("#modal-semester").text($(this).data("semester"));
+            $("#modal-nama-siswa").text($(this).data("nama"));
+            $("#modal-status").text($(this).data("status"));
+        });
+
+        // saat tombol ACC ditekan -> kirim ajax
+        $("#btnAcc").click(function() {
+            $.ajax({
+                url: "../../proses/proses_acc_spp.php",
+                type: "POST",
+                data: {
+                    id_pembayaran: idPembayaran
+                },
+                success: function(response) {
+                    console.log(response);
+                    alert("Pembayaran berhasil di ACC!");
+                    location.reload();
+                },
+                error: function(xhr, status, error) {
+                    alert("Gagal ACC: " + error);
+                    console.log(xhr.responseText);
+                }
+            });
+
+        });
+    });
+</script>
+
+<!-- modal acc  -->
+
+<!-- // Script untuk mengisi modal detail pembayaran -->
+<!-- <script>
     document.addEventListener('DOMContentLoaded', function() {
         var detailButtons = document.querySelectorAll('.btn-detail-pembayaran');
         detailButtons.forEach(function(btn) {
@@ -191,4 +250,4 @@ if (!$query) {
             });
         });
     });
-</script>
+</script> -->
