@@ -89,7 +89,9 @@ if (!$query) {
                                     <td><?= htmlspecialchars($row['kelas_pembayaran']) ?></td>
                                     <td><?= htmlspecialchars($row['semester']) ?></td>
                                     <td><?= htmlspecialchars($row['nama_siswa']) ?></td>
-                                    <td><?= htmlspecialchars($row['status_validasi']) ?></td>
+                                    <td id="row-status-<?= htmlspecialchars($row['id_pembayaran']) ?>">
+                                        <?= htmlspecialchars($row['status_validasi']) ?>
+                                    </td>
                                     <td>
                                         <button type="button" class="btn btn-primary btn-detail-pembayaran"
                                             data-bs-toggle="modal" data-bs-target="#detailPembayaranModal"
@@ -101,7 +103,6 @@ if (!$query) {
                                             data-status="<?= htmlspecialchars($row['status_validasi']) ?>">
                                             Detail
                                         </button>
-                                        <!-- <a href=""><span class="badge bg-success">Lihat</span></a> -->
                                     </td>
                                 </tr>
                         <?php
@@ -117,45 +118,46 @@ if (!$query) {
 
 
                 <!-- Modal Detail Pembayaran -->
-                <div class="modal fade" id="detailPembayaranModal" tabindex="-1" aria-labelledby="detailPembayaranModalTitle" aria-hidden="true">
+                <!-- Modal: form POST -->
+                <div class="modal fade" id="detailPembayaranModal" tabindex="-1" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="detailPembayaranModalTitle">Detail Pembayaran SPP</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <table class="table table-borderless mb-0">
-                                    <tr>
-                                        <th>ID Pembayaran</th>
-                                        <td id="modal-id-pembayaran"></td>
-                                    </tr>
-                                    <tr>
-                                        <th>Tanggal Bayar</th>
-                                        <td id="modal-tanggal-bayar"></td>
-                                    </tr>
-                                    <tr>
-                                        <th>Kelas</th>
-                                        <td id="modal-kelas"></td>
-                                    </tr>
-                                    <tr>
-                                        <th>Semester</th>
-                                        <td id="modal-semester"></td>
-                                    </tr>
-                                    <tr>
-                                        <th>Nama Siswa</th>
-                                        <td id="modal-nama-siswa"></td>
-                                    </tr>
-                                    <tr>
-                                        <th>Status</th>
-                                        <td id="modal-status"></td>
-                                    </tr>
-                                </table>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" id="btnAcc" class="btn btn-primary" data-bs-dismiss="modal">ACC</button>
-                                <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button> -->
-                            </div>
+                            <form action="/rpa-spp/proses/proses_acc_spp.php" method="POST">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Detail Pembayaran SPP</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                </div>
+
+                                <div class="modal-body">
+                                    <input type="hidden" name="id_pembayaran" id="input-id-pembayaran">
+
+                                    <div class="mb-2">
+                                        <label class="form-label">Tanggal Bayar</label>
+                                        <input type="text" id="input-tanggal-bayar" class="form-control" disabled>
+                                    </div>
+                                    <div class="mb-2">
+                                        <label class="form-label">Kelas</label>
+                                        <input type="text" id="input-kelas" class="form-control" disabled>
+                                    </div>
+                                    <div class="mb-2">
+                                        <label class="form-label">Semester</label>
+                                        <input type="text" id="input-semester" class="form-control" disabled>
+                                    </div>
+                                    <div class="mb-2">
+                                        <label class="form-label">Nama Siswa</label>
+                                        <input type="text" id="input-nama-siswa" class="form-control" disabled>
+                                    </div>
+                                    <div class="mb-2">
+                                        <label class="form-label">Status</label>
+                                        <input type="text" id="input-status" class="form-control" disabled>
+                                    </div>
+                                </div>
+
+                                <div class="modal-footer">
+                                    <button type="submit" name="acc" class="btn btn-primary">ACC</button>
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -197,41 +199,26 @@ if (!$query) {
 <!-- modal acc  -->
 <script>
     $(document).ready(function() {
-        let idPembayaran = null;
+        $(".btn-detail-pembayaran").on("click", function() {
+            const id = $(this).data("id");
+            const tanggal = $(this).data("tanggal");
+            const kelas = $(this).data("kelas");
+            const semester = $(this).data("semester");
+            const nama = $(this).data("nama");
+            const status = $(this).data("status");
 
-        // saat tombol detail ditekan -> isi modal 
-        $(".btn-detail-pembayaran").click(function() {
-            idPembayaran = $(this).data("id");
-            $("#modal-id-pembayaran").text(idPembayaran);
-            $("#modal-tanggal-bayar").text($(this).data("tanggal"));
-            $("#modal-kelas").text($(this).data("kelas"));
-            $("#modal-semester").text($(this).data("semester"));
-            $("#modal-nama-siswa").text($(this).data("nama"));
-            $("#modal-status").text($(this).data("status"));
-        });
-
-        // saat tombol ACC ditekan -> kirim ajax
-        $("#btnAcc").click(function() {
-            $.ajax({
-                url: "../../proses/proses_acc_spp.php",
-                type: "POST",
-                data: {
-                    id_pembayaran: idPembayaran
-                },
-                success: function(response) {
-                    console.log(response);
-                    alert("Pembayaran berhasil di ACC!");
-                    location.reload();
-                },
-                error: function(xhr, status, error) {
-                    alert("Gagal ACC: " + error);
-                    console.log(xhr.responseText);
-                }
-            });
-
+            $("#input-id-pembayaran").val(id);
+            $("#input-tanggal-bayar").val(tanggal);
+            $("#input-kelas").val(kelas);
+            $("#input-semester").val(semester);
+            $("#input-nama-siswa").val(nama);
+            $("#input-status").val(status);
         });
     });
 </script>
+
+
+
 
 <!-- modal acc  -->
 
