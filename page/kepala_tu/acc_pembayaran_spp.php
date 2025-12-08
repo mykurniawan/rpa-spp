@@ -61,13 +61,14 @@ if (!$query) {
     <section class="section">
         <div class="card">
             <div class="card-header">
-                <h5 class="card-title">Simple Datatable</h5>
+                <h5 class="card-title">Data Pembayaran SPP</h5>
             </div>
             <div class="card-body">
                 <table class="table table-striped" id="table1">
                     <thead>
                         <tr>
                             <th>No</th>
+                            <th>ID</th>
                             <th>Tanggal Bayar</th>
                             <th>Kelas</th>
                             <th>Semester</th>
@@ -85,6 +86,7 @@ if (!$query) {
                         ?>
                                 <tr>
                                     <td><?= $no++ ?></td>
+                                    <td><?= htmlspecialchars($row['id_pembayaran']) ?></td>
                                     <td><?= htmlspecialchars($row['tanggal_bayar']) ?></td>
                                     <td><?= htmlspecialchars($row['kelas_pembayaran']) ?></td>
                                     <td><?= htmlspecialchars($row['semester']) ?></td>
@@ -129,11 +131,11 @@ if (!$query) {
                                 </div>
 
                                 <div class="modal-body">
-                                    <input type="hidden" name="id_pembayaran" id="input-id-pembayaran">
+                                    <input type="hidden" name="id" id="input-id-pembayaran" value="">
 
                                     <div class="mb-2">
                                         <label class="form-label">Tanggal Bayar</label>
-                                        <input type="text" id="input-tanggal-bayar" class="form-control" disabled>
+                                        <input type="text" id="input-tanggal-bayar"  class="form-control" disabled>
                                     </div>
                                     <div class="mb-2">
                                         <label class="form-label">Kelas</label>
@@ -200,6 +202,7 @@ if (!$query) {
 <script>
     $(document).ready(function() {
         $(".btn-detail-pembayaran").on("click", function() {
+
             const id = $(this).data("id");
             const tanggal = $(this).data("tanggal");
             const kelas = $(this).data("kelas");
@@ -220,21 +223,6 @@ if (!$query) {
 
 
 
+
 <!-- modal acc  -->
 
-<!-- // Script untuk mengisi modal detail pembayaran -->
-<!-- <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        var detailButtons = document.querySelectorAll('.btn-detail-pembayaran');
-        detailButtons.forEach(function(btn) {
-            btn.addEventListener('click', function() {
-                document.getElementById('modal-id-pembayaran').textContent = btn.getAttribute('data-id');
-                document.getElementById('modal-tanggal-bayar').textContent = btn.getAttribute('data-tanggal');
-                document.getElementById('modal-kelas').textContent = btn.getAttribute('data-kelas');
-                document.getElementById('modal-semester').textContent = btn.getAttribute('data-semester');
-                document.getElementById('modal-nama-siswa').textContent = btn.getAttribute('data-nama');
-                document.getElementById('modal-status').textContent = btn.getAttribute('data-status');
-            });
-        });
-    });
-</script> -->

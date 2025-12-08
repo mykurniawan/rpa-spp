@@ -5,7 +5,6 @@ if (!isset($_SESSION['login_status']) || $_SESSION['role'] !== "Petugas TU") {
     exit();
 }
 ?>
-<?php include "../../templates/sidebar/sidebar_tu.php" ?>
 <?php
 include "../../connect.php";
 $query = mysqli_query($connect, "SELECT t_wali.*, t_siswa.nama AS nama_siswa FROM t_wali 
@@ -17,6 +16,8 @@ if (!$query) {
         " - " . mysqli_error($connect));
 }
 ?>
+
+<?php include "../../templates/sidebar/sidebar_tu.php" ?>
 <div class="page-heading">
     <div class="page-title">
         <div class="row">
