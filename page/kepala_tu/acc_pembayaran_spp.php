@@ -95,16 +95,11 @@ if (!$query) {
                                         <?= htmlspecialchars($row['status_validasi']) ?>
                                     </td>
                                     <td>
-                                        <button type="button" class="btn btn-primary btn-detail-pembayaran"
-                                            data-bs-toggle="modal" data-bs-target="#detailPembayaranModal"
-                                            data-id="<?= htmlspecialchars($row['id_pembayaran']) ?>"
-                                            data-tanggal="<?= htmlspecialchars($row['tanggal_bayar']) ?>"
-                                            data-kelas="<?= htmlspecialchars($row['kelas_pembayaran']) ?>"
-                                            data-semester="<?= htmlspecialchars($row['semester']) ?>"
-                                            data-nama="<?= htmlspecialchars($row['nama_siswa']) ?>"
-                                            data-status="<?= htmlspecialchars($row['status_validasi']) ?>">
-                                            Detail
-                                        </button>
+                                        <a href="/rpa-spp/page/kepala_tu/form_acc_spp.php?id=<?= htmlspecialchars($row['id_pembayaran']) ?>"
+                                            class="btn btn-success" role="button">
+                                            ACC
+                                        </a>
+
                                     </td>
                                 </tr>
                         <?php
@@ -121,7 +116,7 @@ if (!$query) {
 
                 <!-- Modal Detail Pembayaran -->
                 <!-- Modal: form POST -->
-                <div class="modal fade" id="detailPembayaranModal" tabindex="-1" aria-hidden="true">
+                <!-- <div class="modal fade" id="detailPembayaranModal" tabindex="-1" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
                             <form action="/rpa-spp/proses/proses_acc_spp.php" method="POST">
@@ -162,7 +157,8 @@ if (!$query) {
                             </form>
                         </div>
                     </div>
-                </div>
+                </div> -->
+
 
                 <!-- modal  -->
             </div>
@@ -198,31 +194,8 @@ if (!$query) {
 </script>
 
 
-<!-- modal acc  -->
-<script>
-    $(document).ready(function() {
-        $(".btn-detail-pembayaran").on("click", function() {
-
-            const id = $(this).data("id");
-            const tanggal = $(this).data("tanggal");
-            const kelas = $(this).data("kelas");
-            const semester = $(this).data("semester");
-            const nama = $(this).data("nama");
-            const status = $(this).data("status");
-
-            $("#input-id-pembayaran").val(id);
-            $("#input-tanggal-bayar").val(tanggal);
-            $("#input-kelas").val(kelas);
-            $("#input-semester").val(semester);
-            $("#input-nama-siswa").val(nama);
-            $("#input-status").val(status);
-        });
-    });
-</script>
-
 
 
 
 
 <!-- modal acc  -->
-

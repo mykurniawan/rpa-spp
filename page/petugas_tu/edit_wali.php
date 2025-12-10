@@ -95,14 +95,9 @@ if (!$query) {
                                             echo "<td>" . $no++ . "</td>"; // nomor urut
                                             echo "<td>" . htmlspecialchars($data['id_wali']) . "</td>";
                                             echo "<td>" . htmlspecialchars($data['username']) . "</td>";
-                                            // echo "<td>" . htmlspecialchars($data['password']) . "</td>";
                                             echo "<td>" . htmlspecialchars($data['nama']) . "</td>";
                                             echo "<td>" . htmlspecialchars($data['jenis_kelamin']) . "</td>";
                                             echo "<td>" . htmlspecialchars($data['tempat_lahir']) . "</td>";
-                                            // echo "<td>" . htmlspecialchars($data['tgl_lahir']) . "</td>";
-                                            // echo "<td>" . htmlspecialchars($data['alamat']) . "</td>";
-                                            // echo "<td>" . htmlspecialchars($data['no_telpon']) . "</td>";
-                                            // echo "<td>" . htmlspecialchars($data['email']) . "</td>";
                                             echo "<td>" . htmlspecialchars($data['nama_siswa']) . "</td>";
                                             echo "<td>";
                                             echo "<a href='edit_form_wali.php?id=" . urlencode($data['id_wali']) . "' class='btn btn-sm btn-primary me-1'><i class='bi bi-pencil'></i> Edit</a>";
