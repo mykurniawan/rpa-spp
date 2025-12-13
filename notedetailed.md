@@ -28,4 +28,69 @@ pengecekan salah login alert [OK]
 pengecekan login alert [ok]
 
 
+Tambah Filter Lain (Contoh: status)
+$filter = [];
+
+if ($kelas !== '') {
+    $filter[] = "p.kelas = '$kelas'";
+}
+
+$filter[] = "p.status_validasi = 'Pending'";
+
+$where = '';
+if (!empty($filter)) {
+    $where = 'WHERE ' . implode(' AND ', $filter);
+}
+
+Tambah Filter Lain (Contoh: status)
+
+[filterkelasfix]
+$kelas = isset($_GET['kelas']) ? $_GET['kelas'] : '';
+$semester = isset($_GET['semester']) ? $_GET['semester'] : '';
+
+$where = [];
+// if ($kelas !== '') {
+//     $kelas = mysqli_real_escape_string($connect, $kelas);
+//     $where = "WHERE p.kelas = '$kelas'";
+// }
+
+if ($kelas !== '') {
+    $kelas = mysqli_real_escape_string($connect, $kelas);
+    $where[] = "p.kelas = '$kelas'";
+}
+
+if ($semester !== '') {
+    $semester = mysqli_real_escape_string($connect, $semester);
+    $where[] = "p.semester = '$semester'";
+}
+
+$where_sql = '';
+if (!empty($where)) {
+    $where_sql = 'WHERE ' . implode(' AND ', $where);
+}
+
+$sql = "SELECT 
+        p.id_pembayaran,
+        p.tgl_bayar,
+        p.semester,
+        p.kelas,
+        p.status_validasi,
+        p.jumlah_bayar,
+        p.tgl_validasi,
+        w.nama AS nama_wali,
+        s.nama AS nama_siswa
+    FROM t_pembayaran_spp p
+    LEFT JOIN t_wali w ON p.id_wali = w.id_wali
+    LEFT JOIN t_siswa s ON p.id_siswa = s.id_siswa
+    $where_sql
+    ORDER BY p.id_pembayaran DESC
+";
+
+$query = mysqli_query($connect, $sql);
+
+if (!$query) {
+    die("Query gagal dijalankan: " . mysqli_error($connect));
+}
+[filterkelasfix]
+
 

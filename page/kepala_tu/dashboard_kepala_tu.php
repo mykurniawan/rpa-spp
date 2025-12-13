@@ -6,11 +6,51 @@ if (!isset($_SESSION['login_status']) || $_SESSION['role'] !== "Kepala TU") {
 }
 ?>
 <?php include "../../connect.php";
-$query = mysqli_query($connect, "SELECT * FROM `t_pembayaran_spp` WHERE status_validasi = 'Valid'");
+$kelas    = isset($_GET['kelas']) ? $_GET['kelas'] : '';
+$semester = isset($_GET['semester']) ? $_GET['semester'] : '';
+
+$conditions = [];
+
+if ($kelas !== '') {
+    $kelas = mysqli_real_escape_string($connect, $kelas);
+    $conditions[] = "p.kelas = '$kelas'";
+}
+
+if ($semester !== '') {
+    $semester = mysqli_real_escape_string($connect, $semester);
+    $conditions[] = "p.semester = '$semester'";
+}
+
+$where = '';
+if (!empty($conditions)) {
+    $where = 'WHERE ' . implode(' AND ', $conditions);
+}
+
+
+$sql = "SELECT 
+        p.id_pembayaran,
+        p.tgl_bayar,
+        p.semester,
+        p.kelas,
+        p.status_validasi,
+        p.jumlah_bayar,
+        p.tgl_validasi,
+        w.nama AS nama_wali,
+        s.nama AS nama_siswa
+    FROM t_pembayaran_spp p
+    LEFT JOIN t_wali w ON p.id_wali = w.id_wali
+    LEFT JOIN t_siswa s ON p.id_siswa = s.id_siswa
+    $where
+    ORDER BY p.id_pembayaran DESC
+";
+
+$query = mysqli_query($connect, $sql);
 
 if (!$query) {
-    die("Query gagal dijalankan: " . mysqli_error($connect));
+    die('Query gagal: ' . mysqli_error($connect));
 }
+
+
 ?>
 
 
@@ -43,17 +83,123 @@ if (!$query) {
     <section class="row">
         <div class="col-12 col-lg-12">
             <div class="row">
+                <div class="row">
+                    <!-- <div class="col-6 col-lg-3 col-md-6">
+                        <div class="card">
+                            <div class="card-body px-4 py-4-5">
+                                <div class="row">
+                                    <div class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start ">
+                                        <div class="stats-icon purple mb-2">
+                                            <i class="iconly-boldShow"></i>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
+                                        <h6 class="text-muted font-semibold">Biaya SPP</h6>
+                                        <h6 class="font-extrabold mb-0">300.000 </h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+                    <div class="col-6 col-lg-3 col-md-6">
+                        <div class="card">
+                            <div class="card-body px-4 py-4-5">
+                                <div class="row">
+                                    <!-- <div class="col-md-6 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start ">
+                                        <h6>Pilih Kelas</h6>
+                                    </div> -->
+                                    <div class="col-md-12 col-lg-12 col-xl-12 col-xxl-7">
+                                        <!-- <h6 class="text-muted font-semibold">haha</h6> -->
+                                        <h6 class="font-extrabold mb-0">Pilih Kelas</h6> <br>
+                                    </div>
+                                    <form method="GET">
+                                        <select name="kelas" class="form-select" onchange="this.form.submit()">
+                                            <option value="">Pilih</option>
+
+                                            <option value="1" <?= ($kelas == '1') ? 'selected' : '' ?>>Kelas 1</option>
+                                            <option value="2" <?= ($kelas == '2') ? 'selected' : '' ?>>Kelas 2</option>
+                                            <option value="3" <?= ($kelas == '3') ? 'selected' : '' ?>>Kelas 3</option>
+                                            <option value="4" <?= ($kelas == '4') ? 'selected' : '' ?>>Kelas 4</option>
+                                            <option value="5" <?= ($kelas == '5') ? 'selected' : '' ?>>Kelas 5</option>
+                                            <option value="6" <?= ($kelas == '6') ? 'selected' : '' ?>>Kelas 6</option>
+                                        </select>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-lg-3 col-md-6">
+                        <div class="card">
+                            <div class="card-body px-4 py-4-5">
+                                <div class="row">
+                                    <!-- <div class="col-md-6 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start ">
+                                        <h6>Pilih Kelas</h6>
+                                    </div> -->
+                                    <div class="col-md-12 col-lg-12 col-xl-12 col-xxl-7">
+                                        <!-- <h6 class="text-muted font-semibold">haha</h6> -->
+                                        <h6 class="font-extrabold mb-0">Semester</h6> <br>
+                                    </div>
+                                    <form method="GET">
+                                        <select name="semester" class="form-select" onchange="this.form.submit()">
+                                            <option value="">Pilih</option>
+                                            <option value="Ganjil" <?= ($semester == 'Ganjil') ? 'selected' : '' ?>>Ganjil</option>
+                                            <option value="Genap" <?= ($semester == 'Genap') ? 'selected' : '' ?>>Genap</option>
+                                        </select>
+                                    </form>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="col-6 col-lg-3 col-md-6">
+                        <div class="card">
+                            <div class="card-body px-4 py-4-5">
+                                <div class="row">
+                                    <div class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start ">
+                                        <div class="stats-icon green mb-2">
+                                            <i class="iconly-boldAdd-User"></i>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
+                                        <h6 class="text-muted font-semibold">Kelas</h6>
+                                        <h6 class="font-extrabold mb-0">haha</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+                    <!-- <div class="col-6 col-lg-3 col-md-6">
+                        <div class="card">
+                            <div class="card-body px-4 py-4-5">
+                                <div class="row">
+                                    <div class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start ">
+                                        <div class="stats-icon red mb-2">
+                                            <i class="iconly-boldBookmark"></i>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
+                                        <h6 class="text-muted font-semibold">Riwayat Pembayaran</h6>
+                                        <h6 class="font-extrabold mb-0"></h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+                </div>
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
                             <h4>Daftar Pembayaran SPP yang Masuk</h4>
                         </div>
                         <div class="card-body">
+
+
                             <div class="card">
                                 <div class="card-header">
                                     <h5 class="card-title">
                                         Data pembayaran SPP
                                     </h5>
+
                                 </div>
                                 <div class="card-body">
 
@@ -62,14 +208,15 @@ if (!$query) {
                                             <tr>
                                                 <th>No</th>
                                                 <th>ID Pembayaran</th>
-                                                <th>ID Wali</th>
+                                                <th>Wali</th>
                                                 <!-- <th>Password</th> -->
-                                                <th>ID Siswa</th>
+                                                <th>Siswa</th>
                                                 <th>Tanggal Bayar</th>
                                                 <th>Kelas</th>
-                                                <!-- <th>Tanggal Lahir</th> -->
-                                                <th>Semester1</th>
+                                                <th>Semester</th>
                                                 <th>Status</th>
+                                                <th>Nominal</th>
+                                                <th>tgl verifikasi</th>
                                                 <!-- <th>email</th>
                                                 <th>Siswa</th>
                                             </tr> -->
@@ -85,15 +232,16 @@ if (!$query) {
                                                     echo "<tr>";
                                                     echo "<td>" . $no++ . "</td>"; // nomor urut
                                                     echo "<td>" . htmlspecialchars($data['id_pembayaran']) . "</td>";
-                                                    echo "<td>" . htmlspecialchars($data['id_wali']) . "</td>";
+                                                    echo "<td>" . htmlspecialchars($data['nama_wali']) . "</td>";
                                                     // echo "<td>" . htmlspecialchars($data['password']) . "</td>";
-                                                    echo "<td>" . htmlspecialchars($data['id_siswa']) . "</td>";
+                                                    echo "<td>" . htmlspecialchars($data['nama_siswa']) . "</td>";
                                                     echo "<td>" . htmlspecialchars($data['tgl_bayar']) . "</td>";
                                                     echo "<td>" . htmlspecialchars($data['kelas']) . "</td>";
                                                     // echo "<td>" . htmlspecialchars($data['tgl_lahir']) . "</td>";
                                                     echo "<td>" . htmlspecialchars($data['semester']) . "</td>";
                                                     echo "<td>" . htmlspecialchars($data['status_validasi']) . "</td>";
-                                                    // echo "<td>" . htmlspecialchars($data['email']) . "</td>";
+                                                    echo "<td>" . htmlspecialchars($data['jumlah_bayar']) . "</td>";
+                                                    echo "<td>" . htmlspecialchars($data['tgl_validasi']) . "</td>";
                                                     // echo "<td>" . htmlspecialchars($data['nama_siswa']) . "</td>";
                                                     echo "<td>";
                                                 }
@@ -128,6 +276,13 @@ if (!$query) {
                                             });
                                         </script>
                                     </table>
+                                    <div class="mt-3 text-end">
+                                        <a href="cetak_pembayaran_spp.php?kelas=<?= urldecode($kelas) ?>" target="_blank" class="btn btn-success">
+                                            Cetak
+                                        </a>
+                                    </div>
+
+
                                 </div>
                             </div>
                             <!-- <div id="chart-profile-visit"></div> -->
