@@ -19,7 +19,9 @@ $query = mysqli_query($connect, " SELECT
     FROM t_pembayaran_spp
     LEFT JOIN t_siswa 
         ON t_pembayaran_spp.id_siswa = t_siswa.id_siswa
+        WHERE status_validasi = 'Pending'
     ORDER BY t_pembayaran_spp.id_pembayaran DESC
+    
 ");
 
 // $data = mysqli_fetch_array($query);
@@ -41,7 +43,19 @@ if (!$query) {
             echo '<div class="alert alert-success alert-dismissible fade show" role="alert">ACC pembayaran berhasil.<button type="button" class="btn-close" aria-label="Close" onclick="this.parentElement.remove()"></button></div>';
         }
     }
+
+    if(isset($_GET['msg'])) {
+        $msg = $_GET['msg'];
+        if ($msg === 'acc_success') {
+            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">Pembayaran SPP berhasil di ACC.<button type="button" class="btn-close" aria-label="Close" onclick="this.parentElement.remove()"></button></div>';
+        } elseif ($msg === 'acc_failed') {
+            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">Gagal meng-ACC pembayaran SPP. Silakan coba lagi.<button type="button" class="btn-close" aria-label="Close" onclick="this.parentElement.remove()"></button></div>';
+        } elseif ($msg === 'invalid_data') {
+            echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">Data pembayaran tidak valid.<button type="button" class="btn-close" aria-label="Close" onclick="this.parentElement.remove()"></button></div>';
+        }
+    }
     ?>
+
     <div class="page-title">
         <div class="row">
             <div class="col-12 col-md-6 order-md-1 order-last">

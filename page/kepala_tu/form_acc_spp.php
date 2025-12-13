@@ -80,9 +80,15 @@ $data = mysqli_fetch_assoc($query);
                             <label class="form-label">Status</label>
                             <input type="text" class="form-control" value="<?= htmlspecialchars($data['status_validasi']); ?>" readonly>
                         </div>
+                        <div class="mb-3">
+                            <label class="form-label">Tanggal Validasi</label>
+                                <input type="text" class="form-control" 
+           value="<?= date('Y-m-d H:i:s'); ?>" 
+           readonly>
+                        </div>
 
                         <button type="submit" name="acc" class="btn btn-success">
-                            ✔ ACC Pembayaran
+                            ACC Pembayaran
                         </button>
 
                         <a href="../kepalatu/data_validasi_pembayaran_spp.php" class="btn btn-secondary">Batal</a>

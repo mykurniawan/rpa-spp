@@ -139,11 +139,20 @@ $data = mysqli_fetch_array($query);
                                         </div>
                                         <div class="col-md-4">
                                             <!-- <label for="first-name-horizontal">Tanggal Bayar</label> -->
+
                                         </div>
                                         <div class="col-md-8 form-group">
                                             <input type="text" id="id_siswa" class="form-control" name="id_siswa"
                                                 placeholder="" hidden value="<?= $data['id_siswa'] ?>"> <!--ambil dari session login nanti -->
                                         </div>
+
+                                        <div class="col-md-4">
+                                            <label for="first-name-horizontal">Tanggal Bayar</label>
+                                        </div>
+                                        <div class="col-md-8 form-group">
+                                            <input type="date" id="tgl_bayar" class="form-control" name="tgl_bayar">
+                                        </div>
+
                                         <div class="col-md-4">
                                             <label for="first-name-horizontal">Kelas</label>
                                         </div>
