@@ -106,6 +106,30 @@ if (!isset($_SESSION['login_status']) || $_SESSION['role'] !== "Petugas TU") {
                                     </div>
                                     <div class="col-md-6 col-12">
                                         <div class="form-group">
+                                            <label for="kelas">Kelas</label>
+                                            <select class="form-select" id="kelas" name="kelas" required>
+                                                <option value="">-- Pilih Kelas --</option>
+                                                <option value="1">Kelas 1</option>
+                                                <option value="2">Kelas 2</option>
+                                                <option value="3">Kelas 3</option>
+                                                <option value="4">Kelas 4</option>
+                                                <option value="5">Kelas 5</option>
+                                                <option value="6">Kelas 6</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 col-12">
+                                        <div class="form-group">
+                                            <label for="id_siswa" class="form-label">Nama Siswa</label>
+                                            <select class="form-select" id="id_siswa" name="id_siswa" required>
+                                                <option value="">-- Pilih Siswa --</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <!-- <div class="col-md-6 col-12">
+                                        <div class="form-group">
                                             <label for="id_siswa" class="form-label">Nama Siswa</label>
                                             <select class="form-select" id="id_siswa" name="id_siswa" required>
                                                 <option value="">--Pilih Siswa--</option>
@@ -126,7 +150,7 @@ if (!isset($_SESSION['login_status']) || $_SESSION['role'] !== "Petugas TU") {
                                                 ?>
                                             </select>
                                         </div>
-                                    </div>
+                                    </div> -->
 
                                     <div class="col-12 d-flex justify-content-end">
                                         <button type="submit" class="btn btn-primary me-1 mb-1">Simpan</button>
@@ -142,6 +166,30 @@ if (!isset($_SESSION['login_status']) || $_SESSION['role'] !== "Petugas TU") {
     </section>
     <!-- // Basic multiple Column Form section end -->
 </div>
+
+<script>
+document.getElementById('kelas').addEventListener('change', function () {
+    const kelas = this.value;
+    const siswaSelect = document.getElementById('id_siswa');
+
+    siswaSelect.innerHTML = '<option value="">Loading...</option>';
+
+    if (kelas === '') {
+        siswaSelect.innerHTML = '<option value="">-- Pilih Siswa --</option>';
+        return;
+    }
+
+    fetch('getSBK.php?kelas=' + kelas)
+        .then(response => response.text())
+        .then(data => {
+            siswaSelect.innerHTML = data;
+        })
+        .catch(() => {
+            siswaSelect.innerHTML = '<option value="">Gagal memuat data</option>';
+        });
+});
+</script>
+
 
 
 

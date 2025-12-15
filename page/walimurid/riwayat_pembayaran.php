@@ -13,6 +13,7 @@ $query = mysqli_query($connect, " SELECT
         t_pembayaran_spp.id_pembayaran AS id_pembayaran,
         t_pembayaran_spp.id_wali AS id_wali,
         t_pembayaran_spp.tgl_bayar AS tanggal_bayar,
+        t_pembayaran_spp.kwitansi AS gambar_kwitansi,
         t_pembayaran_spp.semester AS semester,
         t_pembayaran_spp.kelas AS kelas_pembayaran,
         t_pembayaran_spp.status_validasi AS status_validasi,
@@ -74,6 +75,7 @@ if (!$query) {
                             <th>Kelas</th>
                             <th>Semester</th>
                             <th>Nama Siswa</th>
+                            <th>Kwitansi</th>
                             <th>Status</th>
                             <th>Detail</th>
                         </tr>
@@ -91,6 +93,34 @@ if (!$query) {
                                     <td><?= htmlspecialchars($row['kelas_pembayaran']) ?></td>
                                     <td><?= htmlspecialchars($row['semester']) ?></td>
                                     <td><?= htmlspecialchars($row['nama_siswa']) ?></td>
+                                    <!-- <td><?= htmlspecialchars($row['gambar_kwitansi']) ?></td> -->
+        <td class="text-center">
+    <?php if (!empty($row['gambar_kwitansi'])) : ?>
+        <img 
+            src="../../assets/kwitansi/<?= htmlspecialchars($row['gambar_kwitansi']) ?>"
+            alt="Kwitansi"
+            class="img-thumbnail kwitansi-thumb"
+            style="max-width:70px; cursor:pointer;"
+            data-bs-toggle="modal"
+            data-bs-target="#detailPembayaranModal"
+            data-id="<?= htmlspecialchars($row['id_pembayaran']) ?>"
+            data-tanggal="<?= htmlspecialchars($row['tanggal_bayar']) ?>"
+            data-kelas="<?= htmlspecialchars($row['kelas_pembayaran']) ?>"
+            data-semester="<?= htmlspecialchars($row['semester']) ?>"
+            data-nama="<?= htmlspecialchars($row['nama_siswa']) ?>"
+            data-status="<?= htmlspecialchars($row['status_validasi']) ?>"
+            data-bukti="<?= htmlspecialchars($row['gambar_kwitansi']) ?>"
+        >
+    <?php else : ?>
+        <span class="text-muted">-</span>
+    <?php endif; ?>
+</td>
+
+
+                                    <!-- <td>
+    <?= htmlspecialchars($row['status_validasi']) ?>
+</td> -->
+
                                     <td><?= htmlspecialchars($row['status_validasi']) ?></td>
                                     <td>
                                         <button type="button" class="btn btn-primary btn-detail-pembayaran"
@@ -128,7 +158,7 @@ if (!$query) {
                 </table>
 
                 <!-- modal  -->
-            
+
 
                 <!-- Modal Detail Pembayaran -->
                 <div class="modal fade" id="detailPembayaranModal" tabindex="-1" aria-labelledby="detailPembayaranModalTitle" aria-hidden="true">
@@ -140,12 +170,41 @@ if (!$query) {
                             </div>
                             <div class="modal-body">
                                 <table class="table table-borderless mb-0">
-                                    <tr><th>ID Pembayaran</th><td id="modal-id-pembayaran"></td></tr>
-                                    <tr><th>Tanggal Bayar</th><td id="modal-tanggal-bayar"></td></tr>
-                                    <tr><th>Kelas</th><td id="modal-kelas"></td></tr>
-                                    <tr><th>Semester</th><td id="modal-semester"></td></tr>
-                                    <tr><th>Nama Siswa</th><td id="modal-nama-siswa"></td></tr>
-                                    <tr><th>Status</th><td id="modal-status"></td></tr>
+                                    <tr>
+                                        <th>ID Pembayaran</th>
+                                        <td id="modal-id-pembayaran"></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Tanggal Bayar</th>
+                                        <td id="modal-tanggal-bayar"></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Kelas</th>
+                                        <td id="modal-kelas"></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Semester</th>
+                                        <td id="modal-semester"></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Nama Siswa</th>
+                                        <td id="modal-nama-siswa"></td>
+                                    </tr>
+                                    <tr>
+                                        <!-- <th> kwirtansi </th> -->
+                                            <div class="text-center mt-3">
+    <img id="modal-kwitansi"
+         src=""
+         alt="Bukti Pembayaran"
+         class="img-fluid rounded"
+         style="max-height:400px;">
+</div>
+
+                                    </tr>
+                                    <tr>
+                                        <th>Status</th>
+                                        <td id="modal-status"></td>
+                                    </tr>
                                 </table>
                             </div>
                             <div class="modal-footer">
@@ -191,17 +250,62 @@ if (!$query) {
 <!-- script modal  -->
 <script>
     // Script untuk mengisi modal detail pembayaran
-    document.addEventListener('DOMContentLoaded', function() {
-        var detailButtons = document.querySelectorAll('.btn-detail-pembayaran');
-        detailButtons.forEach(function(btn) {
-            btn.addEventListener('click', function() {
-                document.getElementById('modal-id-pembayaran').textContent = btn.getAttribute('data-id');
-                document.getElementById('modal-tanggal-bayar').textContent = btn.getAttribute('data-tanggal');
-                document.getElementById('modal-kelas').textContent = btn.getAttribute('data-kelas');
-                document.getElementById('modal-semester').textContent = btn.getAttribute('data-semester');
-                document.getElementById('modal-nama-siswa').textContent = btn.getAttribute('data-nama');
-                document.getElementById('modal-status').textContent = btn.getAttribute('data-status');
-            });
+    // document.addEventListener('DOMContentLoaded', function() {
+    //     var detailButtons = document.querySelectorAll('.btn-detail-pembayaran');
+    //     detailButtons.forEach(function(btn) {
+    //         btn.addEventListener('click', function() {
+    //             document.getElementById('modal-id-pembayaran').textContent = btn.getAttribute('data-id');
+    //             document.getElementById('modal-tanggal-bayar').textContent = btn.getAttribute('data-tanggal');
+    //             document.getElementById('modal-kelas').textContent = btn.getAttribute('data-kelas');
+    //             document.getElementById('modal-semester').textContent = btn.getAttribute('data-semester');
+    //             document.getElementById('modal-nama-siswa').textContent = btn.getAttribute('data-nama');
+    //             document.getElementById('modal-status').textContent = btn.getAttribute('data-status');
+    //         });
+    //     });
+    // });
+
+
+    // document.addEventListener('DOMContentLoaded', function() {
+    //     const modalImg = document.getElementById('modal-bukti-bayar');
+
+    //     document.querySelectorAll('.btn-detail-pembayaran, img[data-bukti]')
+    //         .forEach(el => {
+    //             el.addEventListener('click', function() {
+    //                 document.getElementById('modal-id-pembayaran').textContent = this.dataset.id;
+    //                 document.getElementById('modal-tanggal-bayar').textContent = this.dataset.tanggal;
+    //                 document.getElementById('modal-kelas').textContent = this.dataset.kelas;
+    //                 document.getElementById('modal-semester').textContent = this.dataset.semester;
+    //                 document.getElementById('modal-nama-siswa').textContent = this.dataset.nama;
+    //                 document.getElementById('modal-status').textContent = this.dataset.status;
+
+    //                 if (this.dataset.bukti) {
+    //                     modalImg.src = '../../assets/kwitansi/' + this.dataset.bukti;
+    //                     modalImg.style.display = 'block';
+    //                 } else {
+    //                     modalImg.style.display = 'none';
+    //                 }
+    //             });
+    //         });
+    // });
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.kwitansi-thumb').forEach(function (img) {
+        img.addEventListener('click', function () {
+
+            document.getElementById('modal-id-pembayaran').textContent = img.dataset.id;
+            document.getElementById('modal-tanggal-bayar').textContent = img.dataset.tanggal;
+            document.getElementById('modal-kelas').textContent = img.dataset.kelas;
+            document.getElementById('modal-semester').textContent = img.dataset.semester;
+            document.getElementById('modal-nama-siswa').textContent = img.dataset.nama;
+            document.getElementById('modal-status').textContent = img.dataset.status;
+
+            // Gambar kwitansi
+            const gambar = img.dataset.bukti;
+            document.getElementById('modal-kwitansi').src =
+                '../../assets/kwitansi/' + gambar;
         });
     });
+});
 </script>

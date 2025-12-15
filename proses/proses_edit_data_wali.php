@@ -5,6 +5,7 @@ if (isset($_POST['id_wali'])) {
     $id_wali = $_POST['id_wali'];
     $username = $_POST['username'];
     $password = $_POST['password'];
+    $password_hash = password_hash($password, PASSWORD_BCRYPT);
     $nama = $_POST['nama'];
     $jk = $_POST['jenis_kelamin'];
     $tempat_lahir = $_POST['tempat_lahir'];
@@ -16,7 +17,7 @@ if (isset($_POST['id_wali'])) {
     $id_siswa = $_POST['id_siswa'];
 
     $query = mysqli_query($connect, "UPDATE t_wali SET username='" . mysqli_real_escape_string($connect, $username) . "', 
-        password='" . mysqli_real_escape_string($connect, $password) . "', 
+        password='" . mysqli_real_escape_string($connect, $password_hash) . "', 
         nama='" . mysqli_real_escape_string($connect, $nama) . "',
         jenis_kelamin='" . mysqli_real_escape_string($connect, $jk) . "', 
         tempat_lahir='" . mysqli_real_escape_string($connect, $tempat_lahir) . "', 
