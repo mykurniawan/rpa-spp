@@ -115,7 +115,6 @@ if (!$query) {
                                     <form method="GET">
                                         <select name="kelas" class="form-select" onchange="this.form.submit()">
                                             <option value="">Pilih</option>
-
                                             <option value="1" <?= ($kelas == '1') ? 'selected' : '' ?>>Kelas 1</option>
                                             <option value="2" <?= ($kelas == '2') ? 'selected' : '' ?>>Kelas 2</option>
                                             <option value="3" <?= ($kelas == '3') ? 'selected' : '' ?>>Kelas 3</option>
@@ -123,7 +122,7 @@ if (!$query) {
                                             <option value="5" <?= ($kelas == '5') ? 'selected' : '' ?>>Kelas 5</option>
                                             <option value="6" <?= ($kelas == '6') ? 'selected' : '' ?>>Kelas 6</option>
                                         </select>
-                                    </form>
+                                    <!-- </form> -->
                                 </div>
                             </div>
                         </div>
@@ -139,7 +138,7 @@ if (!$query) {
                                         <!-- <h6 class="text-muted font-semibold">haha</h6> -->
                                         <h6 class="font-extrabold mb-0">Semester</h6> <br>
                                     </div>
-                                    <form method="GET">
+                                    <!-- <form method="GET"> -->
                                         <select name="semester" class="form-select" onchange="this.form.submit()">
                                             <option value="">Pilih</option>
                                             <option value="Ganjil" <?= ($semester == 'Ganjil') ? 'selected' : '' ?>>Ganjil</option>
