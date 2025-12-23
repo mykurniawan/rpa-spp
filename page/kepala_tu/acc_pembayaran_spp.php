@@ -14,6 +14,7 @@ $query = mysqli_query($connect, " SELECT
         t_pembayaran_spp.tgl_bayar AS tanggal_bayar,
         t_pembayaran_spp.semester AS semester,
         t_pembayaran_spp.kelas AS kelas_pembayaran,
+        t_pembayaran_spp.jumlah_bayar AS jumlah_bayar,
         t_pembayaran_spp.status_validasi AS status_validasi,
         t_siswa.nama AS nama_siswa
     FROM t_pembayaran_spp
@@ -87,6 +88,7 @@ if (!$query) {
                             <th>Kelas</th>
                             <th>Semester</th>
                             <th>Nama Siswa</th>
+                            <th>Jumlah Bayar</th>
                             <th>Status</th>
                             <th>Detail</th>
                         </tr>
@@ -105,6 +107,7 @@ if (!$query) {
                                     <td><?= htmlspecialchars($row['kelas_pembayaran']) ?></td>
                                     <td><?= htmlspecialchars($row['semester']) ?></td>
                                     <td><?= htmlspecialchars($row['nama_siswa']) ?></td>
+                                    <td>Rp. <?= htmlspecialchars(number_format($row['jumlah_bayar'], 0, ',', '.')) ?></td>
                                     <td id="row-status-<?= htmlspecialchars($row['id_pembayaran']) ?>">
                                         <?= htmlspecialchars($row['status_validasi']) ?>
                                     </td>

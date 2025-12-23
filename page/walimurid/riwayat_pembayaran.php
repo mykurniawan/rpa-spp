@@ -49,7 +49,7 @@ if (!$query) {
         <div class="row">
             <div class="col-12 col-md-6 order-md-1 order-last">
                 <h3>Riwayat Pembayaran</h3>
-                <p class="text-subtitle text-muted">Riwayat pembayaran SPP atas nama (siswa)</p>
+                <p class="text-subtitle text-muted">Riwayat pembayaran SPP</p>
             </div>
             <div class="col-12 col-md-6 order-md-2 order-first">
                 <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
@@ -94,27 +94,26 @@ if (!$query) {
                                     <td><?= htmlspecialchars($row['semester']) ?></td>
                                     <td><?= htmlspecialchars($row['nama_siswa']) ?></td>
                                     <!-- <td><?= htmlspecialchars($row['gambar_kwitansi']) ?></td> -->
-        <td class="text-center">
-    <?php if (!empty($row['gambar_kwitansi'])) : ?>
-        <img 
-            src="../../assets/kwitansi/<?= htmlspecialchars($row['gambar_kwitansi']) ?>"
-            alt="Kwitansi"
-            class="img-thumbnail kwitansi-thumb"
-            style="max-width:70px; cursor:pointer;"
-            data-bs-toggle="modal"
-            data-bs-target="#detailPembayaranModal"
-            data-id="<?= htmlspecialchars($row['id_pembayaran']) ?>"
-            data-tanggal="<?= htmlspecialchars($row['tanggal_bayar']) ?>"
-            data-kelas="<?= htmlspecialchars($row['kelas_pembayaran']) ?>"
-            data-semester="<?= htmlspecialchars($row['semester']) ?>"
-            data-nama="<?= htmlspecialchars($row['nama_siswa']) ?>"
-            data-status="<?= htmlspecialchars($row['status_validasi']) ?>"
-            data-bukti="<?= htmlspecialchars($row['gambar_kwitansi']) ?>"
-        >
-    <?php else : ?>
-        <span class="text-muted">-</span>
-    <?php endif; ?>
-</td>
+                                    <td class="text-center">
+                                        <?php if (!empty($row['gambar_kwitansi'])) : ?>
+                                            <img
+                                                src="../../assets/kwitansi/<?= htmlspecialchars($row['gambar_kwitansi']) ?>"
+                                                alt="Kwitansi"
+                                                class="img-thumbnail kwitansi-thumb"
+                                                style="max-width:70px; cursor:pointer;"
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#detailPembayaranModal"
+                                                data-id="<?= htmlspecialchars($row['id_pembayaran']) ?>"
+                                                data-tanggal="<?= htmlspecialchars($row['tanggal_bayar']) ?>"
+                                                data-kelas="<?= htmlspecialchars($row['kelas_pembayaran']) ?>"
+                                                data-semester="<?= htmlspecialchars($row['semester']) ?>"
+                                                data-nama="<?= htmlspecialchars($row['nama_siswa']) ?>"
+                                                data-status="<?= htmlspecialchars($row['status_validasi']) ?>"
+                                                data-bukti="<?= htmlspecialchars($row['gambar_kwitansi']) ?>">
+                                        <?php else : ?>
+                                            <span class="text-muted">-</span>
+                                        <?php endif; ?>
+                                    </td>
 
 
                                     <!-- <td>
@@ -192,13 +191,13 @@ if (!$query) {
                                     </tr>
                                     <tr>
                                         <!-- <th> kwirtansi </th> -->
-                                            <div class="text-center mt-3">
-    <img id="modal-kwitansi"
-         src=""
-         alt="Bukti Pembayaran"
-         class="img-fluid rounded"
-         style="max-height:400px;">
-</div>
+                                        <div class="text-center mt-3">
+                                            <img id="modal-kwitansi"
+                                                src=""
+                                                alt="Bukti Pembayaran"
+                                                class="img-fluid rounded"
+                                                style="max-height:400px;">
+                                        </div>
 
                                     </tr>
                                     <tr>
@@ -290,22 +289,22 @@ if (!$query) {
 </script>
 
 <script>
-document.addEventListener('DOMContentLoaded', function () {
-    document.querySelectorAll('.kwitansi-thumb').forEach(function (img) {
-        img.addEventListener('click', function () {
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('.kwitansi-thumb').forEach(function(img) {
+            img.addEventListener('click', function() {
 
-            document.getElementById('modal-id-pembayaran').textContent = img.dataset.id;
-            document.getElementById('modal-tanggal-bayar').textContent = img.dataset.tanggal;
-            document.getElementById('modal-kelas').textContent = img.dataset.kelas;
-            document.getElementById('modal-semester').textContent = img.dataset.semester;
-            document.getElementById('modal-nama-siswa').textContent = img.dataset.nama;
-            document.getElementById('modal-status').textContent = img.dataset.status;
+                document.getElementById('modal-id-pembayaran').textContent = img.dataset.id;
+                document.getElementById('modal-tanggal-bayar').textContent = img.dataset.tanggal;
+                document.getElementById('modal-kelas').textContent = img.dataset.kelas;
+                document.getElementById('modal-semester').textContent = img.dataset.semester;
+                document.getElementById('modal-nama-siswa').textContent = img.dataset.nama;
+                document.getElementById('modal-status').textContent = img.dataset.status;
 
-            // Gambar kwitansi
-            const gambar = img.dataset.bukti;
-            document.getElementById('modal-kwitansi').src =
-                '../../assets/kwitansi/' + gambar;
+                // Gambar kwitansi
+                const gambar = img.dataset.bukti;
+                document.getElementById('modal-kwitansi').src =
+                    '../../assets/kwitansi/' + gambar;
+            });
         });
     });
-});
 </script>

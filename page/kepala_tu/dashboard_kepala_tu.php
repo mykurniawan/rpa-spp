@@ -101,7 +101,7 @@ if (!$query) {
                             </div>
                         </div>
                     </div> -->
-                    <div class="col-6 col-lg-3 col-md-6">
+                    <div class="col-6 col-lg-6 col-md-6">
                         <div class="card">
                             <div class="card-body px-4 py-4-5">
                                 <div class="row">
@@ -127,7 +127,7 @@ if (!$query) {
                             </div>
                         </div>
                     </div>
-                    <div class="col-6 col-lg-3 col-md-6">
+                    <div class="col-6 col-lg-6 col-md-6">
                         <div class="card">
                             <div class="card-body px-4 py-4-5">
                                 <div class="row">
@@ -206,7 +206,7 @@ if (!$query) {
                                         <thead>
                                             <tr>
                                                 <th>No</th>
-                                                <th>ID Pembayaran</th>
+                                                <!-- <th>ID Pembayaran</th> -->
                                                 <th>Wali</th>
                                                 <!-- <th>Password</th> -->
                                                 <th>Siswa</th>
@@ -230,7 +230,7 @@ if (!$query) {
                                                 while ($data = mysqli_fetch_assoc($query)) {
                                                     echo "<tr>";
                                                     echo "<td>" . $no++ . "</td>"; // nomor urut
-                                                    echo "<td>" . htmlspecialchars($data['id_pembayaran']) . "</td>";
+                                                    // echo "<td>" . htmlspecialchars($data['id_pembayaran']) . "</td>";
                                                     echo "<td>" . htmlspecialchars($data['nama_wali']) . "</td>";
                                                     // echo "<td>" . htmlspecialchars($data['password']) . "</td>";
                                                     echo "<td>" . htmlspecialchars($data['nama_siswa']) . "</td>";

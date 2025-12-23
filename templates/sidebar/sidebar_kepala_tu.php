@@ -84,7 +84,7 @@
                                     <a href="../../page/kepala_tu/acc_pembayaran_spp.php" class="submenu-link">ACC Pembayaran</a>
                                 </li>
                                 <li class="submenu-item  ">
-                                    <a href="../../page/kepala_tu/data_pembayaran_spp.php" class="submenu-link">Data Pembayaran SPP</a>
+                                    <a href="../../page/kepala_tu/upload_report_spp.php" class="submenu-link">Upload Report</a>
                                 </li>
                             </ul>
                         </li>

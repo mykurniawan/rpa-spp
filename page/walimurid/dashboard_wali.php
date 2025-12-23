@@ -15,7 +15,11 @@ $query = mysqli_query($connect, "SELECT
     t_wali.nama as nama_wali,
     t_siswa.nis as nis_siswa,
     t_siswa.nama as nama_siswa,
-    t_siswa.kelas as kelas_siswa
+    t_siswa.kelas as kelas_siswa,
+    t_siswa.jk as jk_siswa,
+    t_siswa.tempat_lahir as tempat_lahir,
+    t_siswa.tgl_lahir as tgl_lahir,
+    t_siswa.alamat as alamat_siswa
     FROM t_wali LEFT JOIN t_siswa ON t_wali.id_siswa = t_siswa.id_siswa WHERE t_wali.id_wali='$id_wali'");
 $data = mysqli_fetch_assoc($query);
 
@@ -39,31 +43,33 @@ if (!$query) {
         }
     }
     ?>
-    <h3>Selamat datang Bapak <?= $data['nama_wali'] ?> di sistem pembayaran spp MI Al-Huda</h3>
+    <h3>Selamat datang <?= $data['nama_wali'] ?> di sistem pembayaran spp MI Al-Huda</h3>
 </div>
 
 <div class="page-content">
     <section class="row">
         <div class="col-12 col-lg-12">
             <div class="row">
-                <div class="col-6 col-lg-3 col-md-6">
+                <div class="col-6 col-lg-4 col-md-6">
                     <div class="card">
                         <div class="card-body px-4 py-4-5">
                             <div class="row">
                                 <div class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start ">
                                     <div class="stats-icon purple mb-2">
-                                        <i class="iconly-boldShow"></i>
-                                    </div>
+                                        <!-- <i class="iconly-boldShow"></i>  -->
+                                        <i class="iconly-boldWallet"></i>
+                                    </div> 
                                 </div>
                                 <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
                                     <h6 class="text-muted font-semibold">Biaya SPP</h6>
-                                    <h6 class="font-extrabold mb-0">300.000 </h6>
+                                    
+                                    <h6 class="font-extrabold mb-0">Rp. 300.000 </h6>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-6 col-lg-3 col-md-6">
+                <div class="col-6 col-lg-4 col-md-6">
                     <div class="card">
                         <div class="card-body px-4 py-4-5">
                             <div class="row">
@@ -73,31 +79,33 @@ if (!$query) {
                                     </div>
                                 </div>
                                 <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
-                                    <h6 class="text-muted font-semibold">Nama (Siswa) <?= $data['nama_siswa'] ?></h6>
-                                    <h6 class="font-extrabold mb-0">NISN/id</h6>
+                                    <h6 class="text-muted font-semibold">Nama : <?= $data['nama_siswa'] ?></h6>
+                                    <h6 class="font-extrabold mb-0">NISN : <?= $data['nis_siswa'] ?></h6>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-6 col-lg-3 col-md-6">
+                <div class="col-6 col-lg-4 col-md-6">
                     <div class="card">
                         <div class="card-body px-4 py-4-5">
                             <div class="row">
                                 <div class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start ">
                                     <div class="stats-icon green mb-2">
-                                        <i class="iconly-boldAdd-User"></i>
+                                        <!-- <i class="iconly-boldAdd-User"></i> -->
+                                        <i class="iconly-boldCategory"></i>
+
                                     </div>
                                 </div>
                                 <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
-                                    <h6 class="text-muted font-semibold">Kelas</h6>
-                                    <h6 class="font-extrabold mb-0"><?= $data['kelas_siswa'] ?></h6>
+                                    <h6 class="text-muted font-semibold">MI AL-Huda</h6>
+                                    <h6 class="font-extrabold mb-0">Kelas :<?= $data['kelas_siswa'] ?></h6>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-6 col-lg-3 col-md-6">
+                <!-- <div class="col-6 col-lg-3 col-md-6">
                     <div class="card">
                         <div class="card-body px-4 py-4-5">
                             <div class="row">
@@ -113,7 +121,7 @@ if (!$query) {
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
 
             <!-- <div class="row">
@@ -143,20 +151,20 @@ if (!$query) {
                 </div> -->
 
 
-                <div class="col-12 col-xl-6">
+                <div class="col-12 col-xl-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4>Latest Comments</h4>
+                            <h4>Profil Siswa</h4>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-hover table-lg">
-                                    <thead>
+                                    <!-- <thead>
                                         <tr>
                                             <th>Profil</th>
                                             <th>Siswa</th>
                                         </tr>
-                                    </thead>
+                                    </thead> -->
                                     <tbody>
                                         <tr>
                                             <td class="col-3">
@@ -183,11 +191,51 @@ if (!$query) {
                                         <tr>
                                             <td class="col-3">
                                                 <div class="d-flex align-items-center">
+                                                    <p class="font-bold ms-3 mb-0">Jenis Kelamin</p>
+                                                </div>
+                                            </td>
+                                            <td class="col-auto">
+                                                <p class=" mb-0"><?= $data['jk_siswa'] ?></p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="col-3">
+                                                <div class="d-flex align-items-center">
                                                     <p class="font-bold ms-3 mb-0">Kelas</p>
                                                 </div>
                                             </td>
                                             <td class="col-auto">
                                                 <p class=" mb-0"><?= $data['kelas_siswa'] ?></p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="col-3">
+                                                <div class="d-flex align-items-center">
+                                                    <p class="font-bold ms-3 mb-0">Kota Kelahiran</p>
+                                                </div>
+                                            </td>
+                                            <td class="col-auto">
+                                                <p class=" mb-0"><?= $data['tempat_lahir'] ?></p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="col-3">
+                                                <div class="d-flex align-items-center">
+                                                    <p class="font-bold ms-3 mb-0">Tanggal Lahir</p>
+                                                </div>
+                                            </td>
+                                            <td class="col-auto">
+                                                <p class=" mb-0"><?= date('d/m/Y', strtotime($data['tgl_lahir'])) ?></p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="col-3">
+                                                <div class="d-flex align-items-center">
+                                                    <p class="font-bold ms-3 mb-0">Alamat</p>
+                                                </div>
+                                            </td>
+                                            <td class="col-auto">
+                                                <p class=" mb-0"><?= $data['alamat_siswa'] ?></p>
                                             </td>
                                         </tr>
                                     </tbody>
