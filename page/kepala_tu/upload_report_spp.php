@@ -6,52 +6,51 @@ if (!isset($_SESSION['login_status']) || $_SESSION['role'] !== "Kepala TU") {
 }
 ?>
 <?php include "../../connect.php";
-$kelas    = isset($_GET['kelas']) ? $_GET['kelas'] : '';
-$semester = isset($_GET['semester']) ? $_GET['semester'] : '';
+// $kelas    = isset($_GET['kelas']) ? $_GET['kelas'] : '';
+// $semester = isset($_GET['semester']) ? $_GET['semester'] : '';
 
-$conditions = [];
+// $conditions = [];
 
-if ($kelas !== '') {
-    $kelas = mysqli_real_escape_string($connect, $kelas);
-    $conditions[] = "p.kelas = '$kelas'";
-}
+// if ($kelas !== '') {
+//     $kelas = mysqli_real_escape_string($connect, $kelas);
+//     $conditions[] = "p.kelas = '$kelas'";
+// }
 
-if ($semester !== '') {
-    $semester = mysqli_real_escape_string($connect, $semester);
-    $conditions[] = "p.semester = '$semester'";
-}
+// if ($semester !== '') {
+//     $semester = mysqli_real_escape_string($connect, $semester);
+//     $conditions[] = "p.semester = '$semester'";
+// }
 
-$where = '';
-if (!empty($conditions)) {
-    $where = 'WHERE ' . implode(' AND ', $conditions);
-}
+// $where = '';
+// if (!empty($conditions)) {
+//     $where = 'WHERE ' . implode(' AND ', $conditions);
+// }
 
 
-$sql = "SELECT 
-        p.id_pembayaran,
-        p.tgl_bayar,
-        p.semester,
-        p.kelas,
-        p.status_validasi,
-        p.jumlah_bayar,
-        p.tgl_validasi,
-        w.nama AS nama_wali,
-        s.nama AS nama_siswa
-    FROM t_pembayaran_spp p
-    LEFT JOIN t_wali w ON p.id_wali = w.id_wali
-    LEFT JOIN t_siswa s ON p.id_siswa = s.id_siswa
-    $where
-    ORDER BY p.id_pembayaran DESC
-";
+// $sql = "SELECT 
+//         p.id_pembayaran,
+//         p.tgl_bayar,
+//         p.semester,
+//         p.kelas,
+//         p.status_validasi,
+//         p.jumlah_bayar,
+//         p.tgl_validasi,
+//         w.nama AS nama_wali,
+//         s.nama AS nama_siswa
+//     FROM t_pembayaran_spp p
+//     LEFT JOIN t_wali w ON p.id_wali = w.id_wali
+//     LEFT JOIN t_siswa s ON p.id_siswa = s.id_siswa
+//     $where
+//     ORDER BY p.id_pembayaran DESC
+// ";
 
-$query = mysqli_query($connect, $sql);
+// $query = mysqli_query($connect, $sql);
 
-if (!$query) {
-    die('Query gagal: ' . mysqli_error($connect));
-}
+// if (!$query) {
+//     die('Query gagal: ' . mysqli_error($connect));
+// }
 
 ?>
-
 
 <?php include "../../templates/sidebar/sidebar_kepala_tu.php" ?>
 <div class="page-heading">
@@ -69,10 +68,10 @@ if (!$query) {
     // Notifikasi pesan sukses / gagal input data
     if (isset($_GET['msg'])) {
         $msg = $_GET['msg'];
-        if ($msg === 'input_sukses') {
-            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">Data wali berhasil ditambahkan.<button type="button" class="btn-close" aria-label="Close" onclick="this.parentElement.remove()"></button></div>';
-        } elseif ($msg === 'input_gagal') {
-            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">Gagal menambahkan data wali.<button type="button" class="btn-close" aria-label="Close" onclick="this.parentElement.remove()"></button></div>';
+        if ($msg === 'input_success') {
+            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">File report berhasil diupload.<button type="button" class="btn-close" aria-label="Close" onclick="this.parentElement.remove()"></button></div>';
+        } elseif ($msg === 'input_failed') {
+            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">Gagal upload file report.<button type="button" class="btn-close" aria-label="Close" onclick="this.parentElement.remove()"></button></div>';
         }
     }
     ?>
@@ -99,14 +98,14 @@ if (!$query) {
                                 </div>
                                 <div class="card-body">
 
-                                    <form class="form form-horizontal" method="post" action="../../proses/proses_report.php" enctype="multipart/form-data">
+                                    <form class="form form-horizontal" method="post" action="../../proses/proses_upload_report_spp.php" enctype="multipart/form-data">
                                         <div class="form-body">
                                             <div class="row">
                                                 <div class="col-md-4">
                                                     <label for="first-name-horizontal">Tanggal Upload</label>
                                                 </div>
                                                 <div class="col-md-8 form-group">
-                                                    <input type="date" id="tgl_bayar" class="form-control" name="tgl_bayar">
+                                                    <input type="date" id="tgl_bayar" class="form-control" name="tgl_upload">
                                                 </div>
 
                                                 <div class="col-md-4">
@@ -143,8 +142,8 @@ if (!$query) {
                                                     <label for="kwitansi">Report</label>
                                                 </div>
                                                 <div class="col-md-8 form-group">
-                                                    <input type="file" id="kwitansi" class="form-control" name="kwitansi"
-                                                        placeholder="Kwitansi">
+                                                    <input type="file" id="file_report" class="form-control" name="file_report"
+                                                        placeholder="file_report" required>
                                                 </div>
                                                 
                                                 <div class="col-sm-12 mt-5 d-flex justify-content-end">
@@ -228,6 +227,8 @@ if (!$query) {
         </div> -->
     </section>
 </div>
+<?php include "./../../templates/footer.php" ?>
+
 
 <script>
     // Auto-fade and remove alerts after 4 seconds
@@ -258,4 +259,3 @@ if (!$query) {
         }
     });
 </script>
-<?php include "./../../templates/footer.php" ?>
