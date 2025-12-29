@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard - Kepala TU</title>
+    <title>Dashboard - Staff Keuangan Yayasan</title>
 
 
 
@@ -66,30 +66,10 @@
                         <!-- <li class="sidebar-title">Menu</li> -->
                         <li
                             class="sidebar-item active ">
-                            <a href="../../page/kepala_tu/dashboard_kepala_tu.php" class='sidebar-link'>
+                            <a href="../../page/staff_keuangan/dashboard_staff_keu.php" class='sidebar-link'>
                                 <i class="bi bi-grid-fill"></i>
-                                <span>Dashboard Kepala TU</span>
+                                <span>Dashboard Staff Keuangan Yayasan</span>
                             </a>
-                        </li>
-                        <li class="sidebar-title">Data</li>
-                        <li
-                            class="sidebar-item  has-sub">
-                            <a href="#" class='sidebar-link'>
-                                <i class="bi bi-stack"></i>
-                                <span>Data Pembayaran</span>
-                            </a>
-
-                            <ul class="submenu ">
-                                <li class="submenu-item  ">
-                                    <a href="../../page/kepala_tu/acc_pembayaran_spp.php" class="submenu-link">ACC Pembayaran</a>
-                                </li>
-                                <li class="submenu-item  ">
-                                    <a href="../../page/kepala_tu/upload_report_spp.php" class="submenu-link">Upload Report</a>
-                                </li>
-                                <li class="submenu-item  ">
-                                    <a href="../../page/kepala_tu/data_report.php" class="submenu-link">Data Report</a>
-                                </li>
-                            </ul>
                         </li>
 
                         <li class="sidebar-title">Pilihan</li>

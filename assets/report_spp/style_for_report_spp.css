@@ -1,0 +1,35 @@
+ body {
+     margin: 0;
+     background-color: #f4f6f9;
+ }
+
+ .pdf-header {
+     background: #1e293b;
+     color: #fff;
+     padding: 12px 20px;
+     display: flex;
+     align-items: center;
+     justify-content: space-between;
+ }
+
+ .pdf-header h5 {
+     margin: 0;
+     font-weight: 600;
+ }
+
+ .pdf-viewer {
+     width: 100%;
+     height: calc(100vh - 60px);
+     border: none;
+     background: #fff;
+ }
+
+ .btn-download {
+     background: #0d6efd;
+     color: #fff;
+ }
+
+ .btn-download:hover {
+     background: #0b5ed7;
+     color: #fff;
+ }

@@ -3,7 +3,7 @@ include '../connect.php';
 
 $username            = mysqli_real_escape_string($connect, $_POST['username']);
 $password            = mysqli_real_escape_string($connect, $_POST['password']);
-$password_hash = password_hash($password, PASSWORD_BCRYPT);
+$password_hash       = password_hash($password, PASSWORD_BCRYPT);
 $nama                = mysqli_real_escape_string($connect, $_POST['nama']);
 $jenis_kelamin       = mysqli_real_escape_string($connect, $_POST['jk']);
 $tempat_lahir        = mysqli_real_escape_string($connect, $_POST['tempat_lahir']);

@@ -1,13 +1,9 @@
 <?php
 include "../connect.php";
 
-// $id_wali      = mysqli_real_escape_string($connect, $_POST['id_wali']);
-// $id_siswa     = mysqli_real_escape_string($connect, $_POST['id_siswa']);
 $tgl_upload    = mysqli_real_escape_string($connect, $_POST['tgl_upload']);
 $kelas        = mysqli_real_escape_string($connect, $_POST['kelas']);
 $semester     = mysqli_real_escape_string($connect, $_POST['semester']);
-// $jumlah_bayar = mysqli_real_escape_string($connect, $_POST['jumlah_bayar']);
-// $catatan      = mysqli_real_escape_string($connect, $_POST['catatan']);
 
 // ========== UPLOAD FILE ==========
 $allowed_extensions = ['pdf'];

@@ -63,6 +63,34 @@ if (mysqli_num_rows($result_tu) === 1) {
 }
 
 /* =====================================================
+   3. CEK LOGIN STAFF KEUANGAN
+===================================================== */
+
+$query_staff_keu = "SELECT * FROM t_staff_keu_yys WHERE username='$username' LIMIT 1";
+$result_staff_keu = mysqli_query($connect, $query_staff_keu);
+
+if (mysqli_num_rows($result_staff_keu) === 1) {
+
+    $data = mysqli_fetch_assoc($result_staff_keu);
+
+    if ($password_plain === $data['password']) {
+
+        $_SESSION['login_status'] = true;
+        $_SESSION['role'] = $data['role'];
+        $_SESSION['id_tu'] = $data['id_tu'];
+        $_SESSION['username'] = $data['username'];
+
+        // ============================
+        // Redirect berdasarkan role
+        // ============================
+        if ($data['role'] === 'Staff Keuangan Yayasan') {
+            header("Location: ../page/staff_keuangan/dashboard_staff_keu.php?msg=login_success");
+        }
+        exit();
+    }
+}
+
+/* =====================================================
    JIKA KEDUA TIDAK COCOK → LOGIN GAGAL
 ===================================================== */
 header("Location: ../index.php?msg=login_failed");
