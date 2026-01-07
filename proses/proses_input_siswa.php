@@ -21,8 +21,6 @@ $query = "INSERT INTO t_siswa (
                  '$nama_walimurid', '$kelas', '$pekerjaan_walimurid', '$asal_sekolah'
           )";
 
-
-
 if (mysqli_query($connect, $query)) {
   header("Location: /rpa-spp/page/petugas_administrasi/dashboard_administrasi.php?msg=input_sukses");
   exit();
