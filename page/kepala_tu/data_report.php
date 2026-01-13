@@ -24,7 +24,7 @@ if (!$query) {
 
 ?>
 
-<?php include "../../templates/sidebar/sidebar_staff_keu.php"; ?>
+<?php include "../../templates/sidebar/sidebar_kepala_tu.php"; ?>
 <div class="page-heading">
     <?php
     if (isset($_GET['msg'])) {
@@ -85,7 +85,7 @@ if (!$query) {
                                     <td><?= htmlspecialchars($row['semester']) ?></td>
                                     <td><?= htmlspecialchars($row['file_report']) ?></td>
                                     <td>
-                                        <a href="/rpa-spp/page/staff_keuangan/review_report_spp.php?id=<?= (int)$row['id'] ?>"
+                                        <a href="/rpa-spp/page/kepala_tu/review_report_spp.php?id=<?= (int)$row['id'] ?>"
                                             class="btn btn-info"
                                             target="_blank">
                                             Review PDF
